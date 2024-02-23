@@ -8,6 +8,7 @@ public class PlayerInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<DesktopInput>().AsSingle();
+        
         Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();
     }
 }

@@ -1,18 +1,21 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class DesktopInput : IInput, ITickable
 {
-    private Vector2 _movement;
-    private Vector2 _look;
-    private bool _isJump;
-    private bool _isSprint;
+    public event Action PausePressed;
 
     private const string VERTICAL_KEY = "Vertical";
     private const string HORIZONTAL_KEY = "Horizontal";
     private const string MOUSE_X_KEY = "Mouse X";
     private const string MOUSE_Y_KEY = "Mouse Y";
     private const string JUMP_KEY = "Jump";
+
+    private Vector2 _movement;
+    private Vector2 _look;
+    private bool _isJump;
+    private bool _isSprint;
 
     public Vector2 Movement => _movement;
     public Vector2 Look => _look;
@@ -25,6 +28,7 @@ public class DesktopInput : IInput, ITickable
         ProcessLookChange();
         ProcessJumpPressing();
         ProcessSprintPressing();
+        ProcessPausePressed();
     }
 
     private void ProcessMovementChange()
@@ -38,4 +42,10 @@ public class DesktopInput : IInput, ITickable
 
     private void ProcessSprintPressing()
         => _isSprint = Input.GetKey(KeyCode.LeftShift);
+
+    private void ProcessPausePressed()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+            PausePressed?.Invoke();
+    }
 }
