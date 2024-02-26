@@ -38,7 +38,7 @@ public class DesktopInput : IInput, ITickable
         => _look = new Vector2(Input.GetAxis(MOUSE_X_KEY), Input.GetAxis(MOUSE_Y_KEY));
 
     private void ProcessJumpPressing()
-        => _isJump = Input.GetButton(JUMP_KEY);
+        => _isJump = Input.GetButton(JUMP_KEY); //???
 
     private void ProcessSprintPressing()
         => _isSprint = Input.GetKey(KeyCode.LeftShift);

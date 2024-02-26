@@ -15,6 +15,7 @@ MonoBehaviour:
   _walkSpeed: 6
   _runSpeed: 12
   _jumpForce: 7
-  _lookSpeed: 2
+  _jumpsMaxCount: 5
   _gravity: 10
-  _lookXLimit: 45
+  _lookSensitivity: 2
+  _lookLimit: 45
