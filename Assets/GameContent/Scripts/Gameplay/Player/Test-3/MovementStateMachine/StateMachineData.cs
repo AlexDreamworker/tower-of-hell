@@ -1,11 +1,16 @@
 using System;
+using UnityEngine;
 
+//TODO: Rename to CHARACTER_STATE_MACHINE_DATA
 public class StateMachineData
 {
-    public float XVelocity;
-    public float YVelocity;
+    //?public float XVelocity;
+    //?public float YVelocity;
+
+    public Vector3 MoveDirection; //!!!
 
     private float _speed;
+
     private float _xInput; //? VERTICAL?
     private float _yInput; //? HORIZONTAL?
 

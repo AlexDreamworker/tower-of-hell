@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
+//TODO: Rename to CHARACTER_STATE_MACHINE
 public class MovementStateMachine : IStateSwitcher
 {
     private List<IState> _states;
     private IState _currentState;
 
+    //TODO: вынести инициализацию в другое место, передавать список состояний + первое состояние.
     public MovementStateMachine(Character character) 
     {
         StateMachineData data = new StateMachineData();
@@ -37,4 +39,6 @@ public class MovementStateMachine : IStateSwitcher
     public void HandleInput() => _currentState.HandleInput();
 
     public void Update() => _currentState.Update();
+
+    public void FixedUpdate() => _currentState.FixedUpdate();
 }

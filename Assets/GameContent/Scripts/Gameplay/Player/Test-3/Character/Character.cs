@@ -1,9 +1,10 @@
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Character : MonoBehaviour
 {
-    //?[SerializeField] private CharacterConfig _config;
+    [SerializeField] private CharacterConfig _config;
     [SerializeField] private GroundChecker _groundChecker;
 
     private IInput _input;
@@ -13,10 +14,10 @@ public class Character : MonoBehaviour
     public IInput Input => _input;
     public Rigidbody Rigidbody => _rigidbody;
     public GroundChecker GroundChecker => _groundChecker;
-    //?public CharacterConfig Config => _config;
+    public CharacterConfig Config => _config;
 
     [Inject]
-    private void Construct(IInput input) 
+    private void Construct(IInput input) //TODO: move init StateMachine
     {
         _input = input;
 
@@ -24,14 +25,11 @@ public class Character : MonoBehaviour
         _stateMachine = new MovementStateMachine(this);
     }
 
-    // private void Awake()
-    // {
-    //     _stateMachine = new MovementStateMachine(this);
-    // }
-
     private void Update()
     {
         _stateMachine.HandleInput();
         _stateMachine.Update();
     }
+
+    private void FixedUpdate() => _stateMachine.FixedUpdate();
 }

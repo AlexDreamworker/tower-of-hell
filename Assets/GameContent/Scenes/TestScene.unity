@@ -600,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83233c225e97ac348b66f20adc63a0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _config: {fileID: 11400000, guid: e157036bbd79d6b4c81901fcda10d800, type: 2}
   _groundChecker: {fileID: 393710339}
 --- !u!1 &525036829
 GameObject:
@@ -2031,7 +2032,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensX: 400
   sensY: 400
-  orientation: {fileID: 1692785781}
+  orientation: {fileID: 393710338}
 --- !u!1 &1692785780
 GameObject:
   m_ObjectHideFlags: 0

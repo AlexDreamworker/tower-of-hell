@@ -7,9 +7,6 @@ public abstract class MovementState : IState
 
     private readonly Character _character;
 
-    protected IInput Input => _character.Input;
-    protected Rigidbody Rigidbody => _character.Rigidbody;
-
     public MovementState(IStateSwitcher stateSwitcher, StateMachineData data, Character character)
     {
         StateSwitcher = stateSwitcher;
@@ -17,45 +14,56 @@ public abstract class MovementState : IState
         _character = character;
     }
 
-    public void Enter()
+    protected IInput Input => _character.Input;
+    protected Rigidbody Rigidbody => _character.Rigidbody;
+
+    public virtual void Enter()
     {
         Debug.Log(GetType());
-
-        AddInputActionCallbacks();
     }
 
-    public void Exit()
-    {
-        RemoveInputActionCallbacks();
-    }
+    public virtual void Exit() { }
 
-    public void HandleInput()
+    public virtual void HandleInput() //TODO: change X and Y to Vector2?
     {
         Data.XInput = ReadHorizontalInput();
         Data.YInput = ReadVerticalInput();
 
-        Data.XVelocity = Data.XInput * Data.Speed;
+        Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
     }
 
-    public void Update()
+    public virtual void Update() { }
+
+    public virtual void FixedUpdate()
     {
-        //Vector3 velocity = GetConvertedVelocity();
-
-        //CharacterController.Move(velocity * Time.deltaTime);
+        MoveRigidbody();
+        LimitFlatVelocity();
+        ApplyAdditionalGravity();   
     }
 
-    public void FixedUpdate()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected virtual void AddInputActionCallbacks() { }
-    protected virtual void RemoveInputActionCallbacks() { }
-
-    protected bool IsHorizontalInputZero() => Data.XInput == 0;
-
-    private Vector3 GetConvertedVelocity() => new Vector3(Data.XVelocity, Data.YVelocity, 0);
+    protected bool IsMovementInputZero() => Input.Movement == Vector2.zero;
 
     private float ReadHorizontalInput() => Input.Movement.x;
     private float ReadVerticalInput() => Input.Movement.y;
+
+    private void MoveRigidbody() //TODO: remove magic number
+    {
+        Rigidbody.AddForce(Data.MoveDirection.normalized * Data.Speed * 10f, ForceMode.Force);
+    }
+
+    private void ApplyAdditionalGravity() //TODO: remove magic number
+    {
+        Rigidbody.AddForce(Vector3.down * 10f, ForceMode.Force);
+    }
+
+    private void LimitFlatVelocity() 
+    {
+        Vector3 flatVelocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+
+        if (flatVelocity.magnitude > Data.Speed) 
+        {
+            Vector3 limitedVelocity = flatVelocity.normalized * Data.Speed;
+            Rigidbody.velocity = new Vector3(limitedVelocity.x, Rigidbody.velocity.y, limitedVelocity.z);
+        }
+    }
 }
