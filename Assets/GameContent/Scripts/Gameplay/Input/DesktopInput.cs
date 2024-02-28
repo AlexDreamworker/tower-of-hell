@@ -32,7 +32,7 @@ public class DesktopInput : IInput, ITickable
     }
 
     private void ProcessMovementChange()
-        => _movement = new Vector2(Input.GetAxis(VERTICAL_KEY), Input.GetAxis(HORIZONTAL_KEY));
+        => _movement = new Vector2(Input.GetAxis(HORIZONTAL_KEY), Input.GetAxis(VERTICAL_KEY));
 
     private void ProcessLookChange()
         => _look = new Vector2(Input.GetAxis(MOUSE_X_KEY), Input.GetAxis(MOUSE_Y_KEY));
