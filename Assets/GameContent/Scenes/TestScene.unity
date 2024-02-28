@@ -207,8 +207,20 @@ MonoBehaviour:
   GroundedOffset: 0.69
   GroundedRadius: 0.43
   GroundLayers:
-    serializedVersion: 2
     m_Bits: 1024
+  _directionMove: {x: 0, y: 0}
+  _isJumpingPressed: 0
+  _isSprinting: 0
+  _isGrounded: 1
+  _speed: 0
+  _targetRotation: 0
+  _rotationVelocity: 0
+  _verticalVelocity: 0
+  _terminalVelocity: 53
+  _controller: {fileID: 0}
+  _mainCamera: {fileID: 0}
+  _xRotation: 0
+  _isJumpButton: 0
 --- !u!1 &128789421
 GameObject:
   m_ObjectHideFlags: 0
