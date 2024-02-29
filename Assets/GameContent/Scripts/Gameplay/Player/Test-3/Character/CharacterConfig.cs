@@ -3,6 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterConfig", menuName = "Configs/Character/CharacterConfig")]
 public class CharacterConfig : ScriptableObject
 {
-    [field: SerializeField] public WalkStateConfig WalkStateConfig { get; private set; }
-    //[SerializeField] private AirborneStateConfig _airbornStateConfig;
+    [Space]
+    [SerializeField] private GroundedStateConfig _groundedStateConfig;
+
+    [Header("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")]
+    [Space]
+    [SerializeField] private AirborneStateConfig _airborneStateConfig;
+
+    public GroundedStateConfig GroundedStateConfig => _groundedStateConfig;
+    public AirborneStateConfig AirborneStateConfig => _airborneStateConfig;
 }

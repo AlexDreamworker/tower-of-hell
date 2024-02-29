@@ -15,12 +15,11 @@ public class MovementStateMachine : IStateSwitcher
         _states = new List<IState>() 
         {
             new IdleState(this, data, character),
-            new WalkState(this, data, character)
-            
-            //new CrouchIdleState(),
-            //new CrouchWalkState(),
-            //new FallState(),
-            //new JumpState(),   
+            new WalkState(this, data, character),
+            new FallState(this, data, character),
+            new JumpState(this, data, character)
+            //new CrouchIdleState(this, data, character),
+            //new CrouchWalkState(this, data, character),
         };
 
         _currentState = _states[0];

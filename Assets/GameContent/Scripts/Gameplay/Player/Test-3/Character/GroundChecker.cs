@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GroundChecker : MonoBehaviour
+public class GroundChecker : MonoBehaviour //TODO: rename to OBSTACLE DETECTOR
 {
     [SerializeField] private LayerMask _ground;
     [SerializeField, Range(1, 3)] private float _playerHeight = 2f;

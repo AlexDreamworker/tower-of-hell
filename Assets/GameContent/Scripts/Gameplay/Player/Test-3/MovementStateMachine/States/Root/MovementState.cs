@@ -16,10 +16,11 @@ public abstract class MovementState : IState
 
     protected IInput Input => _character.Input;
     protected Rigidbody Rigidbody => _character.Rigidbody;
+    protected Transform Transform => _character.transform;
 
     public virtual void Enter()
     {
-        Debug.Log(GetType());
+        //Debug.Log(GetType());
     }
 
     public virtual void Exit() { }
@@ -29,13 +30,21 @@ public abstract class MovementState : IState
         Data.XInput = ReadHorizontalInput();
         Data.YInput = ReadVerticalInput();
 
-        Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
+        //? Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
     }
 
-    public virtual void Update() { }
+    public virtual void Update() 
+    {
+        // if (Rigidbody.velocity == Vector3.zero)
+        //     return;
+
+        // Debug.Log(Rigidbody.velocity);
+    }
 
     public virtual void FixedUpdate()
     {
+        Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
+
         MoveRigidbody();
         LimitFlatVelocity();
         ApplyAdditionalGravity();   

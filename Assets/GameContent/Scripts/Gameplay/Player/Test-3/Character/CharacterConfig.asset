@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <WalkStateConfig>k__BackingField:
     _speed: 7
+  <AirbornStateConfig>k__BackingField:
+    _jumpStateConfig:
+      _force: 10
+    _speed: 0.4
+    _drag: 0

@@ -34,17 +34,6 @@ public class DesktopInput : IInput, ITickable
     private void ProcessMovementChange()
         => _movement = new Vector2(Input.GetAxisRaw(HORIZONTAL_KEY), Input.GetAxisRaw(VERTICAL_KEY));
 
-    // private void ProcessMovementChange()
-    // {
-    //     float horizontalInput = Input.GetAxis(HORIZONTAL_KEY);
-    //     float verticalInput = Input.GetAxis(VERTICAL_KEY);
-
-    //     if (Mathf.Approximately(horizontalInput, 0f) && Mathf.Approximately(verticalInput, 0f))
-    //         _movement = Vector2.zero;
-    //     else
-    //         _movement = new Vector2(horizontalInput, verticalInput);
-    // }
-
     private void ProcessLookChange()
         => _look = new Vector2(Input.GetAxis(MOUSE_X_KEY), Input.GetAxis(MOUSE_Y_KEY));
 
