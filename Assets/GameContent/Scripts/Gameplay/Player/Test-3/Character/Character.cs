@@ -5,15 +5,15 @@ using Zenject;
 public class Character : MonoBehaviour
 {
     [SerializeField] private CharacterConfig _config;
-    [SerializeField] private GroundChecker _groundChecker;
+    [SerializeField] private SphereObstacleDetector _groundDetector;
 
     private IInput _input;
     private MovementStateMachine _stateMachine;
     private Rigidbody _rigidbody;
 
     public IInput Input => _input;
+    public IObstacleDetector GroundDetector => _groundDetector;
     public Rigidbody Rigidbody => _rigidbody;
-    public GroundChecker GroundChecker => _groundChecker;
     public CharacterConfig Config => _config;
 
     [Inject]

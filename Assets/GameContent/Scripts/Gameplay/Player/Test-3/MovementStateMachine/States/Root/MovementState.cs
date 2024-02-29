@@ -21,16 +21,21 @@ public abstract class MovementState : IState
     public virtual void Enter()
     {
         //Debug.Log(GetType());
+
+        AddInputActionCallbacks();
     }
 
-    public virtual void Exit() { }
+    public virtual void Exit() 
+    { 
+        RemoveInputActionCallbacks();
+    }
 
     public virtual void HandleInput() //TODO: change X and Y to Vector2?
     {
         Data.XInput = ReadHorizontalInput();
         Data.YInput = ReadVerticalInput();
 
-        //? Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
+        Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
     }
 
     public virtual void Update() 
@@ -43,12 +48,15 @@ public abstract class MovementState : IState
 
     public virtual void FixedUpdate()
     {
-        Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
+        //?Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
 
         MoveRigidbody();
         LimitFlatVelocity();
         ApplyAdditionalGravity();   
     }
+
+    protected virtual void AddInputActionCallbacks() { }
+    protected virtual void RemoveInputActionCallbacks() { }
 
     protected bool IsMovementInputZero() => Input.Movement == Vector2.zero;
 

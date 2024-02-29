@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class GroundChecker : MonoBehaviour //TODO: rename to OBSTACLE DETECTOR
+public class RayObstacleDetector : MonoBehaviour, IObstacleDetector
 {
-    [SerializeField] private LayerMask _ground;
+    [SerializeField] private LayerMask _layer;
     [SerializeField, Range(1, 3)] private float _playerHeight = 2f;
     [SerializeField, Range(0, 2)] private float _raycastDistanceOffset = 0.1f;
 
-    [SerializeField] private bool _debugRaycast = true;
+    [Space]
+    [SerializeField] private bool _debug = true;
 
     public bool IsTouches { get; private set; }
     private float HalfHeight => _playerHeight / 2f;
@@ -17,13 +18,13 @@ public class GroundChecker : MonoBehaviour //TODO: rename to OBSTACLE DETECTOR
             transform.position, 
             Vector3.down, 
             HalfHeight + _raycastDistanceOffset, 
-            _ground
+            _layer
         ); 
     }
 
     private void OnDrawGizmos()
     {
-        if (_debugRaycast == false)
+        if (_debug == false)
             return;
 
         Gizmos.color = IsTouches ? Color.green : Color.red;

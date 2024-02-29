@@ -15,12 +15,12 @@ public class PauseHandler : IDisposable
     {
         _input = input;
 
-        _input.PausePressed += OnPausePressed;
+        _input.PauseKeyPressed += OnPauseKeyPressed;
     }
 
     public void Dispose()
     {
-        _input.PausePressed -= OnPausePressed;
+        _input.PauseKeyPressed -= OnPauseKeyPressed;
 
         _handlers.Clear();
     }
@@ -35,7 +35,7 @@ public class PauseHandler : IDisposable
             handler.SetPause(isPaused);
     }
 
-    private void OnPausePressed()
+    private void OnPauseKeyPressed()
     {
         _isPaused = !_isPaused;
 

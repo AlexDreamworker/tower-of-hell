@@ -13,7 +13,7 @@ public class JumpState : AirborneState
 
         Debug.Log("<color=yellow>JUMP</color>"); //TODO: delete debug!
 
-        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
+        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z); //TODO: need this?
 
         Rigidbody.AddForce(Transform.up * _config.Force, ForceMode.Impulse);
     }
@@ -27,8 +27,10 @@ public class JumpState : AirborneState
         base.Update();
 
         //TODO: magic number???
-        if (Rigidbody.velocity.y <= 0.001f)
-           StateSwitcher.SwitchState<FallState>();
+        //if (Rigidbody.velocity.y <= 0.001f)
+        if (Rigidbody.velocity.y < 0f)
+
+            StateSwitcher.SwitchState<FallState>();
     }
 
     public override void FixedUpdate() => base.FixedUpdate();

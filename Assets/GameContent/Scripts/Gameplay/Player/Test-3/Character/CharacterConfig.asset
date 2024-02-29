@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8889e6fc8b3f454abc39162a4dc57de, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  <WalkStateConfig>k__BackingField:
-    _speed: 7
-  <AirbornStateConfig>k__BackingField:
+  _groundedStateConfig:
+    _walkStateConfig:
+      _speed: 7
+    _drag: 5
+  _airborneStateConfig:
     _jumpStateConfig:
       _force: 10
     _speed: 0.4

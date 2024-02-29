@@ -4,7 +4,10 @@ using Zenject;
 
 public class DesktopInput : IInput, ITickable
 {
-    public event Action PausePressed;
+    public event Action PauseKeyPressed;
+
+    public event Action JumpKeyStarted;
+    public event Action JumpKeyPerformed;
 
     private const string VERTICAL_KEY = "Vertical";
     private const string HORIZONTAL_KEY = "Horizontal";
@@ -14,12 +17,12 @@ public class DesktopInput : IInput, ITickable
 
     private Vector2 _movement;
     private Vector2 _look;
-    private bool _isJump;
+    //?private bool _isJump;
     private bool _isSprint;
 
     public Vector2 Movement => _movement;
     public Vector2 Look => _look;
-    public bool IsJump => _isJump;
+    //?public bool IsJump => _isJump;
     public bool IsSprint => _isSprint;
 
     public void Tick()
@@ -38,7 +41,15 @@ public class DesktopInput : IInput, ITickable
         => _look = new Vector2(Input.GetAxis(MOUSE_X_KEY), Input.GetAxis(MOUSE_Y_KEY));
 
     private void ProcessJumpPressing()
-        => _isJump = Input.GetButton(JUMP_KEY); //???
+    {
+        if (Input.GetButtonDown(JUMP_KEY))
+            JumpKeyStarted?.Invoke();
+
+        if (Input.GetButtonUp(JUMP_KEY))
+            JumpKeyPerformed?.Invoke();
+
+        //?_isJump = Input.GetButton(JUMP_KEY); //???
+    }
 
     private void ProcessSprintPressing()
         => _isSprint = Input.GetKey(KeyCode.LeftShift);
@@ -46,6 +57,6 @@ public class DesktopInput : IInput, ITickable
     private void ProcessPausePressed()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
-            PausePressed?.Invoke();
+            PauseKeyPressed?.Invoke();
     }
 }

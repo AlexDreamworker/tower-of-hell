@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class FallState : AirborneState
 {
-    private readonly GroundChecker _groundChecker;
+    private readonly IObstacleDetector _groundDetector;
 
     public FallState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
-        => _groundChecker = character.GroundChecker;
+        => _groundDetector = character.GroundDetector;
 
     public override void Enter()
     {
@@ -22,10 +22,8 @@ public class FallState : AirborneState
     {
         base.Update();
 
-        if (_groundChecker.IsTouches)
+        if (_groundDetector.IsTouches)
         {
-            //Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
-
             if (IsMovementInputZero())
                 StateSwitcher.SwitchState<IdleState>();
             else
@@ -33,5 +31,9 @@ public class FallState : AirborneState
         }
     }
 
-    public override void FixedUpdate() => base.FixedUpdate();
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        Rigidbody.AddForce(Data.MoveDirection.normalized * Data.Speed * 100f, ForceMode.Force);
+    }
 }

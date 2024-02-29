@@ -12,6 +12,7 @@ public abstract class AirborneState : MovementState
         base.Enter();
 
         Rigidbody.drag = _config.Drag;
+
         //?Data.Speed *= 0.4f; //TODO: multiplier need?
     }
 
@@ -21,5 +22,8 @@ public abstract class AirborneState : MovementState
 
     public override void Update() => base.Update();
 
-    public override void FixedUpdate() => base.FixedUpdate();
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
 }

@@ -78,7 +78,7 @@ public class PlayerMover : MonoBehaviour, IPause
 
     private bool IsJump() 
     {
-        return _input.IsJump && IsGrounded;
+        return /*_input.IsJump &&*/ IsGrounded;
     }
 
     public void SetPause(bool isPause) => _isPaused = isPause;
