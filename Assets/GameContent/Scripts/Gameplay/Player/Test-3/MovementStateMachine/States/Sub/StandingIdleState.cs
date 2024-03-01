@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class CrouchIdleState : CrouchingState
+public class StandingIdleState : StandingState
 {
-    public CrouchIdleState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) 
+    public StandingIdleState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) 
         : base(stateSwitcher, data, character) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        Debug.Log("<color=orange>CROUCH IDLE</color>"); //TODO: debug!
+        Debug.Log("<color=green>IDLE</color>"); //TODO: debug!
 
         Data.Speed = 0;
     }
@@ -21,6 +21,6 @@ public class CrouchIdleState : CrouchingState
         if (IsMovementInputZero())
             return;
 
-        StateSwitcher.SwitchState<CrouchWalkState>();
+        StateSwitcher.SwitchState<StandingWalkState>();
     }
 }

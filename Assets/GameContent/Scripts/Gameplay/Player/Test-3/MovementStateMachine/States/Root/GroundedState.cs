@@ -18,10 +18,6 @@ public abstract class GroundedState : MovementState
         Data.JumpsCount = 0;
     }
 
-    //public override void Exit() => base.Exit();
-
-    //public override void HandleInput() => base.HandleInput();
-
     public override void Update()
     {
         base.Update();
@@ -30,27 +26,5 @@ public abstract class GroundedState : MovementState
 
         if (_groundDetector.IsTouches == false)
             StateSwitcher.SwitchState<FallState>();
-
-        //* Jump if HOLD jump button
-        if (Input.IsJump)
-            StateSwitcher.SwitchState<JumpState>();
     }
-
-    //public override void FixedUpdate() => base.FixedUpdate();
-
-    protected override void AddInputActionCallbacks() 
-    { 
-        base.AddInputActionCallbacks();
-
-        Input.JumpKeyStarted += OnJumpKeyStarted;
-    }
-
-    protected override void RemoveInputActionCallbacks() 
-    { 
-        base.RemoveInputActionCallbacks();
-
-        Input.JumpKeyStarted -= OnJumpKeyStarted;
-    }
-
-    private void OnJumpKeyStarted() => StateSwitcher.SwitchState<JumpState>();
 }

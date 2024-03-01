@@ -20,6 +20,7 @@ public abstract class MovementState : IState
 
     public virtual void Enter()
     {
+        //TODO: debug
         //Debug.Log(GetType());
 
         AddInputActionCallbacks();
@@ -38,10 +39,7 @@ public abstract class MovementState : IState
         Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
     }
 
-    public virtual void Update() 
-    {
-        // DEBUGS:
-    }
+    public virtual void Update() { }
 
     public virtual void FixedUpdate()
     {

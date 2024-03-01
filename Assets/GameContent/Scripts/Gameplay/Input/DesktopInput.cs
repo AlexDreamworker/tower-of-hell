@@ -9,6 +9,8 @@ public class DesktopInput : IInput, ITickable
     public event Action JumpKeyStarted;
     public event Action JumpKeyPerformed;
 
+    public event Action CrouchKeyPressed;
+
     private const string VERTICAL_KEY = "Vertical";
     private const string HORIZONTAL_KEY = "Horizontal";
     private const string MOUSE_X_KEY = "Mouse X";
@@ -30,6 +32,7 @@ public class DesktopInput : IInput, ITickable
         ProcessMovementChange();
         ProcessLookChange();
         ProcessJumpPressing();
+        ProcessCrouchPressed();
         ProcessSprintPressing();
         ProcessPausePressed();
     }
@@ -49,6 +52,12 @@ public class DesktopInput : IInput, ITickable
 
         if (Input.GetButtonUp(JUMP_KEY))
             JumpKeyPerformed?.Invoke();
+    }
+
+    private void ProcessCrouchPressed() 
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+            CrouchKeyPressed?.Invoke();
     }
 
     private void ProcessSprintPressing()

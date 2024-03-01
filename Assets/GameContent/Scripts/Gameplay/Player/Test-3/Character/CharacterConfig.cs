@@ -6,7 +6,6 @@ public class CharacterConfig : ScriptableObject
     [Space]
     [SerializeField] private GroundedStateConfig _groundedStateConfig;
 
-    [Header("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++")]
     [Space]
     [SerializeField] private AirborneStateConfig _airborneStateConfig;
 

@@ -15,14 +15,6 @@ public abstract class AirborneState : MovementState
         Data.Speed = _config.Speed;
     }
 
-    //public override void Exit() => base.Exit();
-
-    //public override void HandleInput() => base.HandleInput();
-
-    //public override void Update() => base.Update();
-
-    //public override void FixedUpdate() => base.FixedUpdate();
-
     protected override void AddInputActionCallbacks() 
     { 
         base.AddInputActionCallbacks();

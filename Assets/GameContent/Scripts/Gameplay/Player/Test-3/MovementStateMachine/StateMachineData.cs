@@ -15,6 +15,8 @@ public class StateMachineData
     private float _yInput; //? HORIZONTAL?
 
     public int JumpsCount; //!!!
+    public float YScale; //!!!
+    //?public bool IsCrouching; //!!!
 
     public float XInput
     {

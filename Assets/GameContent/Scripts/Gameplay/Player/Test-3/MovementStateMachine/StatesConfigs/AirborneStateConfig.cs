@@ -11,8 +11,9 @@ public class AirborneStateConfig
     [Space]
     [SerializeField] private JumpStateConfig _jumpStateConfig;
 
-    public JumpStateConfig JumpStateConfig => _jumpStateConfig;
     public float Speed => _speed;
     public float Drag => _drag;
     public float MaxJumpsCount => _maxJumpsCount;
+    
+    public JumpStateConfig JumpStateConfig => _jumpStateConfig;
 }

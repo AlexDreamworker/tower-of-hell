@@ -11,7 +11,7 @@ public class JumpState : AirborneState
     {
         base.Enter();
 
-        Debug.Log("<color=yellow>JUMP</color>"); //TODO: delete debug!
+        Debug.Log("<color=yellow>JUMP</color>"); //TODO: debug!
 
         Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z); //TODO: need this?
 
@@ -20,20 +20,12 @@ public class JumpState : AirborneState
         Data.JumpsCount++;
     }
 
-    //public override void Exit() => base.Exit();
-
-    //public override void HandleInput() => base.HandleInput();
-
     public override void Update()
     {
         base.Update();
 
-        //TODO: magic number???
-        //if (Rigidbody.velocity.y <= 0.001f)
         if (Rigidbody.velocity.y < 0f)
 
             StateSwitcher.SwitchState<FallState>();
     }
-
-    //public override void FixedUpdate() => base.FixedUpdate();
 }

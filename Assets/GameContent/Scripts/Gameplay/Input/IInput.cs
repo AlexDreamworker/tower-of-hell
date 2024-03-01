@@ -8,6 +8,8 @@ public interface IInput
     event Action JumpKeyStarted;
     event Action JumpKeyPerformed;
 
+    event Action CrouchKeyPressed;
+
     Vector2 Movement { get; }
     Vector2 Look { get; }
     bool IsJump { get; }

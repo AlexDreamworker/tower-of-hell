@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class WalkStateConfig
+public class StandingWalkStateConfig
 {
     [SerializeField, Range(0, 100)] private float _speed = 7f;
 

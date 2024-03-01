@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //* Movement
     [Space]
-    private float moveSpeed; //* private =D
+    private float moveSpeed;
 
     public float walkSpeed = 7f;
     public float sprintSpeed = 10f;
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     //* Crouching
     public float crouchSpeed = 3.5f;
     public float crouchYScale = 0.5f;
-    private float startYScale; //* private =D
+    private float startYScale;
     private bool headObstacle; //!!!!!!!!!!!!!!
 
     public Transform orientation;

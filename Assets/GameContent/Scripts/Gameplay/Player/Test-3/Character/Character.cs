@@ -6,6 +6,7 @@ public class Character : MonoBehaviour
 {
     [SerializeField] private CharacterConfig _config;
     [SerializeField] private SphereObstacleDetector _groundDetector;
+    [SerializeField] private SphereObstacleDetector _roofDetector;
 
     private IInput _input;
     private MovementStateMachine _stateMachine;
@@ -13,6 +14,7 @@ public class Character : MonoBehaviour
 
     public IInput Input => _input;
     public IObstacleDetector GroundDetector => _groundDetector;
+    public IObstacleDetector RoofDetector => _roofDetector;
     public Rigidbody Rigidbody => _rigidbody;
     public CharacterConfig Config => _config;
 

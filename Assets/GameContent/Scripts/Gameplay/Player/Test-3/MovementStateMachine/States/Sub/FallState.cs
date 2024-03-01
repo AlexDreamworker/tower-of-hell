@@ -11,12 +11,8 @@ public class FallState : AirborneState
     {
         base.Enter();
 
-        Debug.Log("<color=red>FALL</color>"); //TODO: delete debug!
+        Debug.Log("<color=red>FALL</color>"); //TODO: debug!
     }
-
-    //public override void Exit() => base.Exit();
-
-    //public override void HandleInput() => base.HandleInput();
 
     public override void Update()
     {
@@ -25,11 +21,9 @@ public class FallState : AirborneState
         if (_groundDetector.IsTouches)
         {
             if (IsMovementInputZero())
-                StateSwitcher.SwitchState<IdleState>();
+                StateSwitcher.SwitchState<StandingIdleState>();
             else
-                StateSwitcher.SwitchState<WalkState>();
+                StateSwitcher.SwitchState<StandingWalkState>();
         }
     }
-
-    //public override void FixedUpdate() => base.FixedUpdate();
 }
