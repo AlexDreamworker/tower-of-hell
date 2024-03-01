@@ -14,6 +14,8 @@ public class StateMachineData
     private float _xInput; //? VERTICAL?
     private float _yInput; //? HORIZONTAL?
 
+    public int JumpsCount; //!!!
+
     public float XInput
     {
         get => _xInput;

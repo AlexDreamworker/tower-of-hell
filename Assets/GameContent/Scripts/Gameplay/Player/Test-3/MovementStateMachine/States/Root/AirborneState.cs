@@ -12,18 +12,36 @@ public abstract class AirborneState : MovementState
         base.Enter();
 
         Rigidbody.drag = _config.Drag;
-
-        //?Data.Speed *= 0.4f; //TODO: multiplier need?
+        Data.Speed = _config.Speed;
     }
 
-    public override void Exit() => base.Exit();
+    //public override void Exit() => base.Exit();
 
-    public override void HandleInput() => base.HandleInput();
+    //public override void HandleInput() => base.HandleInput();
 
-    public override void Update() => base.Update();
+    //public override void Update() => base.Update();
 
-    public override void FixedUpdate()
+    //public override void FixedUpdate() => base.FixedUpdate();
+
+    protected override void AddInputActionCallbacks() 
+    { 
+        base.AddInputActionCallbacks();
+
+        Input.JumpKeyStarted += OnJumpKeyStarted;
+    }
+
+    protected override void RemoveInputActionCallbacks() 
+    { 
+        base.RemoveInputActionCallbacks();
+
+        Input.JumpKeyStarted -= OnJumpKeyStarted;
+    }
+
+    private void OnJumpKeyStarted()
     {
-        base.FixedUpdate();
+        if (Data.JumpsCount >= _config.MaxJumpsCount)
+            return;
+
+        StateSwitcher.SwitchState<JumpState>();
     }
 }

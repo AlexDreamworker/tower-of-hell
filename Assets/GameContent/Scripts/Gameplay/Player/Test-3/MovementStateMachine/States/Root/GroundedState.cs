@@ -11,11 +11,16 @@ public abstract class GroundedState : MovementState
         _config = character.Config.GroundedStateConfig;
     }
 
-    public override void Enter() => base.Enter();
+    public override void Enter()
+    {
+        base.Enter();
 
-    public override void Exit() => base.Exit();
+        Data.JumpsCount = 0;
+    }
 
-    public override void HandleInput() => base.HandleInput();
+    //public override void Exit() => base.Exit();
+
+    //public override void HandleInput() => base.HandleInput();
 
     public override void Update()
     {
@@ -23,18 +28,15 @@ public abstract class GroundedState : MovementState
 
         Rigidbody.drag = _config.Drag;
 
-        if (_groundDetector.IsTouches)
-            return;
-
         if (_groundDetector.IsTouches == false)
             StateSwitcher.SwitchState<FallState>();
 
-        // //TODO: Not need this part in Crouch states
-        // if (Input.IsJump)
-        //     StateSwitcher.SwitchState<JumpState>();
+        //* Jump if HOLD jump button
+        if (Input.IsJump)
+            StateSwitcher.SwitchState<JumpState>();
     }
 
-    public override void FixedUpdate() => base.FixedUpdate();
+    //public override void FixedUpdate() => base.FixedUpdate();
 
     protected override void AddInputActionCallbacks() 
     { 

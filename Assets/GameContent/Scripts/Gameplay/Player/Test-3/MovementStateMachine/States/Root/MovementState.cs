@@ -40,16 +40,11 @@ public abstract class MovementState : IState
 
     public virtual void Update() 
     {
-        // if (Rigidbody.velocity == Vector3.zero)
-        //     return;
-
-        // Debug.Log(Rigidbody.velocity);
+        // DEBUGS:
     }
 
     public virtual void FixedUpdate()
     {
-        //?Data.MoveDirection = _character.transform.forward * Data.YInput + _character.transform.right * Data.XInput;
-
         MoveRigidbody();
         LimitFlatVelocity();
         ApplyAdditionalGravity();   

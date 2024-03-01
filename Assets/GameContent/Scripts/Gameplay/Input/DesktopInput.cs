@@ -17,12 +17,12 @@ public class DesktopInput : IInput, ITickable
 
     private Vector2 _movement;
     private Vector2 _look;
-    //?private bool _isJump;
+    private bool _isJump;
     private bool _isSprint;
 
     public Vector2 Movement => _movement;
     public Vector2 Look => _look;
-    //?public bool IsJump => _isJump;
+    public bool IsJump => _isJump;
     public bool IsSprint => _isSprint;
 
     public void Tick()
@@ -45,10 +45,10 @@ public class DesktopInput : IInput, ITickable
         if (Input.GetButtonDown(JUMP_KEY))
             JumpKeyStarted?.Invoke();
 
+        _isJump = Input.GetButton(JUMP_KEY);
+
         if (Input.GetButtonUp(JUMP_KEY))
             JumpKeyPerformed?.Invoke();
-
-        //?_isJump = Input.GetButton(JUMP_KEY); //???
     }
 
     private void ProcessSprintPressing()

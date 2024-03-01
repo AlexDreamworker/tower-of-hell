@@ -14,9 +14,9 @@ public class IdleState : GroundedState
         Data.Speed = 0;
     }
 
-    public override void Exit() => base.Exit();
+    //public override void Exit() => base.Exit();
 
-    public override void HandleInput() => base.HandleInput();
+    //public override void HandleInput() => base.HandleInput();
 
     public override void Update()
     {
@@ -28,5 +28,5 @@ public class IdleState : GroundedState
         StateSwitcher.SwitchState<WalkState>();
     }
 
-    public override void FixedUpdate() => base.FixedUpdate();
+    //public override void FixedUpdate() => base.FixedUpdate();
 }

@@ -19,5 +19,5 @@ MonoBehaviour:
   _airborneStateConfig:
     _jumpStateConfig:
       _force: 10
-    _speed: 0.4
+    _speed: 7
     _drag: 0

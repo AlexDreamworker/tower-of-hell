@@ -14,9 +14,9 @@ public class FallState : AirborneState
         Debug.Log("<color=red>FALL</color>"); //TODO: delete debug!
     }
 
-    public override void Exit() => base.Exit();
+    //public override void Exit() => base.Exit();
 
-    public override void HandleInput() => base.HandleInput();
+    //public override void HandleInput() => base.HandleInput();
 
     public override void Update()
     {
@@ -31,9 +31,5 @@ public class FallState : AirborneState
         }
     }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        Rigidbody.AddForce(Data.MoveDirection.normalized * Data.Speed * 100f, ForceMode.Force);
-    }
+    //public override void FixedUpdate() => base.FixedUpdate();
 }
