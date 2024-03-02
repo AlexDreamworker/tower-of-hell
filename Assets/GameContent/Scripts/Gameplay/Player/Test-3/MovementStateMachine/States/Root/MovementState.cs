@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+//TODO: Move to BASE_STATE?
 public abstract class MovementState : IState
 {
     protected readonly IStateSwitcher StateSwitcher;
@@ -48,8 +50,17 @@ public abstract class MovementState : IState
         ApplyAdditionalGravity();   
     }
 
-    protected virtual void AddInputActionCallbacks() { }
-    protected virtual void RemoveInputActionCallbacks() { }
+    //TODO: Move this logic to AIRBORNE_STATE and STANDING_STATE
+    //TODO: OR create STANDING_DASH_STATE and SLIDING_DASH_STATE...
+    protected virtual void AddInputActionCallbacks() 
+    { 
+        Input.DashKeyPressed += OnDashKeyPressed;
+    }
+
+    protected virtual void RemoveInputActionCallbacks() 
+    { 
+        Input.DashKeyPressed -= OnDashKeyPressed;
+    }
 
     protected bool IsMovementInputZero() => Input.Movement == Vector2.zero;
 
@@ -75,5 +86,13 @@ public abstract class MovementState : IState
             Vector3 limitedVelocity = flatVelocity.normalized * Data.Speed;
             Rigidbody.velocity = new Vector3(limitedVelocity.x, Rigidbody.velocity.y, limitedVelocity.z);
         }
+    }
+
+
+    //TODO: Move this logic to AIRBORNE_STATE and STANDING_STATE
+    //TODO: OR create STANDING_DASH_STATE and SLIDING_DASH_STATE...
+    private void OnDashKeyPressed()
+    {
+        StateSwitcher.SwitchState<DashState>();
     }
 }

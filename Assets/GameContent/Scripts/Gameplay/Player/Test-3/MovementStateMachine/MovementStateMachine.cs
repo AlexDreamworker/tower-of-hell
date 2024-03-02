@@ -20,6 +20,7 @@ public class MovementStateMachine : IStateSwitcher
             new JumpState(this, data, character),
             new CrouchIdleState(this, data, character),
             new CrouchWalkState(this, data, character),
+            new DashState(this, data, character)
         };
 
         _currentState = _states[0];
@@ -29,6 +30,12 @@ public class MovementStateMachine : IStateSwitcher
     public void SwitchState<T>() where T : IState
     {
         IState state = _states.FirstOrDefault(state => state is T);
+
+        //* do nothing if state NOT added
+        //*----------------------------------
+        if (state == null)
+            return;
+        //*----------------------------------
 
         _currentState?.Exit();
         _currentState = state;

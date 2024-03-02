@@ -11,6 +11,8 @@ public class DesktopInput : IInput, ITickable
 
     public event Action CrouchKeyPressed;
 
+    public event Action DashKeyPressed;
+
     private const string VERTICAL_KEY = "Vertical";
     private const string HORIZONTAL_KEY = "Horizontal";
     private const string MOUSE_X_KEY = "Mouse X";
@@ -34,6 +36,7 @@ public class DesktopInput : IInput, ITickable
         ProcessJumpPressing();
         ProcessCrouchPressed();
         ProcessSprintPressing();
+        ProcessDashPressed();
         ProcessPausePressed();
     }
 
@@ -62,6 +65,12 @@ public class DesktopInput : IInput, ITickable
 
     private void ProcessSprintPressing()
         => _isSprint = Input.GetKey(KeyCode.LeftShift);
+
+    private void ProcessDashPressed()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+            DashKeyPressed?.Invoke();
+    }
 
     private void ProcessPausePressed()
     {

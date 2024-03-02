@@ -18,6 +18,8 @@ public class StateMachineData
     public float YScale; //!!!
     //?public bool IsCrouching; //!!!
 
+    public float DashCooldownTimer; //!!!
+
     public float XInput
     {
         get => _xInput;

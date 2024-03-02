@@ -9,6 +9,10 @@ public class CharacterConfig : ScriptableObject
     [Space]
     [SerializeField] private AirborneStateConfig _airborneStateConfig;
 
+    [Space]
+    [SerializeField] private DashStateConfig _dashStateConfig;
+
     public GroundedStateConfig GroundedStateConfig => _groundedStateConfig;
     public AirborneStateConfig AirborneStateConfig => _airborneStateConfig;
+    public DashStateConfig DashStateConfig => _dashStateConfig;
 }
