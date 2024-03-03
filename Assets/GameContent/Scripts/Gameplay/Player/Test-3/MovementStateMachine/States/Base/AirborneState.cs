@@ -20,6 +20,7 @@ public abstract class AirborneState : MovementState
         base.AddInputActionCallbacks();
 
         Input.JumpKeyStarted += OnJumpKeyStarted;
+        Input.DashKeyPressed += OnDashKeyPressed;
     }
 
     protected override void RemoveInputActionCallbacks() 
@@ -27,6 +28,7 @@ public abstract class AirborneState : MovementState
         base.RemoveInputActionCallbacks();
 
         Input.JumpKeyStarted -= OnJumpKeyStarted;
+        Input.DashKeyPressed -= OnDashKeyPressed;
     }
 
     private void OnJumpKeyStarted()
@@ -36,4 +38,6 @@ public abstract class AirborneState : MovementState
 
         StateSwitcher.SwitchState<JumpState>();
     }
+
+    private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();
 }

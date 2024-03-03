@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StandingState : GroundedState
+public abstract class StandingState : GroundedState
 {
     private readonly StandingStateConfig _config;
 
@@ -29,6 +29,7 @@ public class StandingState : GroundedState
 
         Input.CrouchKeyPressed += OnCrouchKeyPressed;
         Input.JumpKeyStarted += OnJumpKeyStarted;
+        Input.DashKeyPressed += OnDashKeyPressed;
     }
 
     protected override void RemoveInputActionCallbacks() 
@@ -37,9 +38,12 @@ public class StandingState : GroundedState
 
         Input.CrouchKeyPressed -= OnCrouchKeyPressed;
         Input.JumpKeyStarted -= OnJumpKeyStarted;
+        Input.DashKeyPressed -= OnDashKeyPressed;
     }
 
     private void OnCrouchKeyPressed() => StateSwitcher.SwitchState<CrouchIdleState>();
 
     private void OnJumpKeyStarted() => StateSwitcher.SwitchState<JumpState>();
+
+    private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();
 }

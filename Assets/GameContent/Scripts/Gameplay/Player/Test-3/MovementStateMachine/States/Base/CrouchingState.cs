@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CrouchingState : GroundedState
+public abstract class CrouchingState : GroundedState
 {
     private readonly IObstacleDetector _roofDetector;
     private readonly CrouchingStateConfig _config;
