@@ -7,11 +7,11 @@ public class GroundedStateConfig
     [SerializeField, Range(0, 100)] private float _drag = 5f;
 
     [Space]
-    [SerializeField] private StandingStateConfig _standingStateConfig;
-    [SerializeField] private CrouchingStateConfig _crouchingStateConfig; 
+    [SerializeField] private StandedStateConfig _standedStateConfig;
+    [SerializeField] private CrouchedStateConfig _crouchedStateConfig; 
 
     public float Drag => _drag;
 
-    public StandingStateConfig StandingStateConfig => _standingStateConfig;
-    public CrouchingStateConfig CrouchingStateConfig => _crouchingStateConfig; 
+    public StandedStateConfig StandedStateConfig => _standedStateConfig;
+    public CrouchedStateConfig CrouchedStateConfig => _crouchedStateConfig; 
 }

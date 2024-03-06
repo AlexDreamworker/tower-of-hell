@@ -10,17 +10,18 @@ public class MovementStateMachine : IStateSwitcher
     //TODO: вынести инициализацию в другое место, передавать список состояний + первое состояние.
     public MovementStateMachine(Character character) 
     {
-        StateMachineData data = new StateMachineData();
+        MovementStateMachineData data = new MovementStateMachineData();
 
         _states = new List<IState>() 
         {
-            new StandingIdleState(this, data, character),
-            new StandingWalkState(this, data, character),
-            new FallState(this, data, character),
-            new JumpState(this, data, character),
-            new CrouchIdleState(this, data, character),
-            new CrouchWalkState(this, data, character),
-            new DashState(this, data, character)
+            new IdleState(this, data, character),
+            new WalkingState(this, data, character),
+            new FallingState(this, data, character),
+            new JumpingState(this, data, character),
+            new CrouchingState(this, data, character),
+            new DuckingState(this, data, character),
+            new DashState(this, data, character),
+            new RunningState(this, data, character) //???
         };
 
         _currentState = _states[0];

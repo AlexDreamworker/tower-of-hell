@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class JumpStateConfig
+public class JumpingStateConfig
 {
     [SerializeField, Range(0, 100)] private float _force = 10f;
 

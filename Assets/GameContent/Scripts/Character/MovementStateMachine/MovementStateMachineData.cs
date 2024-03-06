@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 
-//TODO: Rename to CHARACTER_STATE_MACHINE_DATA
-public class StateMachineData
+public class MovementStateMachineData
 {
     //?public float XVelocity;
     //?public float YVelocity;

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public abstract class CrouchingState : GroundedState
+public abstract class CrouchedState : GroundedState
 {
     private readonly IObstacleDetector _roofDetector;
-    private readonly CrouchingStateConfig _config;
+    private readonly CrouchedStateConfig _config;
 
-    public CrouchingState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
+    public CrouchedState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
     {
         _roofDetector = character.RoofDetector;
-        _config = character.Config.GroundedStateConfig.CrouchingStateConfig;
+        _config = character.Config.GroundedStateConfig.CrouchedStateConfig;
     }
 
     public override void Enter()
@@ -45,6 +45,6 @@ public abstract class CrouchingState : GroundedState
         if (_roofDetector.IsTouches)
             return;
 
-        StateSwitcher.SwitchState<StandingIdleState>();
+        StateSwitcher.SwitchState<IdleState>();
     }
 }

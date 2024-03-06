@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public abstract class StandingState : GroundedState
+public abstract class StandedState : GroundedState
 {
-    private readonly StandingStateConfig _config;
+    private readonly StandedStateConfig _config;
 
-    public StandingState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
-        => _config = character.Config.GroundedStateConfig.StandingStateConfig;
+    public StandedState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
+        => _config = character.Config.GroundedStateConfig.StandedStateConfig;
 
     public override void Enter()
     {
@@ -20,7 +20,7 @@ public abstract class StandingState : GroundedState
         base.Update();
 
         if (Input.IsJump)
-            StateSwitcher.SwitchState<JumpState>();
+            StateSwitcher.SwitchState<JumpingState>();
     }
 
     protected override void AddInputActionCallbacks() 
@@ -41,9 +41,9 @@ public abstract class StandingState : GroundedState
         Input.DashKeyPressed -= OnDashKeyPressed;
     }
 
-    private void OnCrouchKeyPressed() => StateSwitcher.SwitchState<CrouchIdleState>();
+    private void OnCrouchKeyPressed() => StateSwitcher.SwitchState<CrouchingState>();
 
-    private void OnJumpKeyStarted() => StateSwitcher.SwitchState<JumpState>();
+    private void OnJumpKeyStarted() => StateSwitcher.SwitchState<JumpingState>();
 
     private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();
 }

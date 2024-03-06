@@ -4,7 +4,7 @@ public abstract class AirborneState : MovementState
 {
     private readonly AirborneStateConfig _config;
 
-    protected AirborneState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
+    protected AirborneState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
         => _config = character.Config.AirborneStateConfig;
 
     public override void Enter()
@@ -36,7 +36,7 @@ public abstract class AirborneState : MovementState
         if (Data.JumpsCount >= _config.MaxJumpsCount)
             return;
 
-        StateSwitcher.SwitchState<JumpState>();
+        StateSwitcher.SwitchState<JumpingState>();
     }
 
     private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();

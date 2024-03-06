@@ -8,7 +8,7 @@ public class DashState : BaseState
     private readonly IObstacleDetector _groundDetector;
     private readonly IObstacleDetector _wallDetector;
     
-    public DashState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
+    public DashState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
     {
         _config = character.Config.DashStateConfig;
         _monoProvider = character;
@@ -18,7 +18,7 @@ public class DashState : BaseState
 
     public override void Enter()
     {
-        Log.Log("DASH", TextColor.Purple);
+        LogStateInfo(GetType(), TextColor.Purple);
 
         _monoProvider.StartCoroutine(DashRoutine());
     }
@@ -35,8 +35,8 @@ public class DashState : BaseState
         Rigidbody.velocity = Vector3.zero;
 
         if (_groundDetector.IsTouches == false)
-            StateSwitcher.SwitchState<FallState>();
+            StateSwitcher.SwitchState<FallingState>();
         else
-            StateSwitcher.SwitchState<StandingIdleState>();
+            StateSwitcher.SwitchState<IdleState>();
     }
 }

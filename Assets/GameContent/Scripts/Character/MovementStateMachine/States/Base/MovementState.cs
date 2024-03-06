@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class MovementState : BaseState
 {
-    protected MovementState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) 
+    protected MovementState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) 
         : base(stateSwitcher, data, character) { }
 
     public override void HandleInput() //TODO: change X and Y to Vector2?

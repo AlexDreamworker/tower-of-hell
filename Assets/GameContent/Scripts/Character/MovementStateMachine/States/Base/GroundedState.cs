@@ -5,7 +5,7 @@ public abstract class GroundedState : MovementState
     private readonly IObstacleDetector _groundDetector;
     private readonly GroundedStateConfig _config;
 
-    protected GroundedState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) : base(stateSwitcher, data, character)
+    protected GroundedState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
     {
         _groundDetector = character.GroundDetector;
         _config = character.Config.GroundedStateConfig;
@@ -25,6 +25,6 @@ public abstract class GroundedState : MovementState
         Rigidbody.drag = _config.Drag;
 
         if (_groundDetector.IsTouches == false)
-            StateSwitcher.SwitchState<FallState>();
+            StateSwitcher.SwitchState<FallingState>();
     }
 }

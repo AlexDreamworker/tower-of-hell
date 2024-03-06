@@ -1,13 +1,13 @@
-public class CrouchIdleState : CrouchingState
+public class CrouchingState : CrouchedState
 {
-    public CrouchIdleState(IStateSwitcher stateSwitcher, StateMachineData data, Character character) 
+    public CrouchingState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) 
         : base(stateSwitcher, data, character) { }
 
     public override void Enter()
     {
         base.Enter();
 
-        Log.Log("CROUCH IDLE", TextColor.Orange);
+        LogStateInfo(GetType(), TextColor.Orange);
 
         Data.Speed = 0;
     }
@@ -19,6 +19,6 @@ public class CrouchIdleState : CrouchingState
         if (IsMovementInputZero())
             return;
 
-        StateSwitcher.SwitchState<CrouchWalkState>();
+        StateSwitcher.SwitchState<DuckingState>();
     }
 }

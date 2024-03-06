@@ -1,13 +1,14 @@
+using System;
 using UnityEngine;
 
 public abstract class BaseState : IState
 {
     protected readonly IStateSwitcher StateSwitcher;
-    protected readonly StateMachineData Data;
+    protected readonly MovementStateMachineData Data;
 
     private readonly Character _character;
 
-    public BaseState(IStateSwitcher stateSwitcher, StateMachineData data, Character character)
+    public BaseState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character)
     {
         StateSwitcher = stateSwitcher;
         Data = data;
@@ -15,7 +16,7 @@ public abstract class BaseState : IState
     }
 
     protected IInputService Input => _character.Input;
-    protected ILogService Log => _character.Log;
+    //protected ILogService Log => _character.Log; 
     protected Rigidbody Rigidbody => _character.Rigidbody;
     protected Transform Transform => _character.transform;
 
@@ -32,4 +33,8 @@ public abstract class BaseState : IState
     protected virtual void AddInputActionCallbacks() { }
 
     protected virtual void RemoveInputActionCallbacks() { }
+
+    //TODO: Why CHARACTER.LOG?
+    protected void LogStateInfo(Type type, string color) 
+        => _character.Log.Log(type.ToString(), color);
 }
