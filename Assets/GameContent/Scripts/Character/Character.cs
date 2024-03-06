@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -28,7 +29,6 @@ public class Character : MonoBehaviour
     }
 
     public IInputService Input => _input;
-    public ILogService Log => _log;
     public IObstacleDetector GroundDetector => _groundDetector;
     public IObstacleDetector RoofDetector => _roofDetector;
     public IObstacleDetector WallDetector => _wallDetector;
@@ -43,4 +43,7 @@ public class Character : MonoBehaviour
     }
 
     private void FixedUpdate() => _stateMachine.FixedUpdate();
+
+    public void LogStateInfo(Type type, string color) 
+        => _log.LogState(type.ToString(), color);
 }

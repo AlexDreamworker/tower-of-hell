@@ -9,7 +9,7 @@ public class DuckingState : CrouchedState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.White);
+        SetStateInfo(GetType(), TextColor.White);
 
         Data.Speed = _config.Speed;
     }

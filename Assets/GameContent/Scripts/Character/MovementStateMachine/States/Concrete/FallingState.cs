@@ -9,7 +9,7 @@ public class FallingState : AirborneState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Red);
+        SetStateInfo(GetType(), TextColor.Red);
     }
 
     public override void Update()

@@ -16,7 +16,6 @@ public abstract class BaseState : IState
     }
 
     protected IInputService Input => _character.Input;
-    //protected ILogService Log => _character.Log; 
     protected Rigidbody Rigidbody => _character.Rigidbody;
     protected Transform Transform => _character.transform;
 
@@ -34,7 +33,6 @@ public abstract class BaseState : IState
 
     protected virtual void RemoveInputActionCallbacks() { }
 
-    //TODO: Why CHARACTER.LOG?
-    protected void LogStateInfo(Type type, string color) 
-        => _character.Log.Log(type.ToString(), color);
+    protected void SetStateInfo(Type type, string color) 
+        => _character.LogStateInfo(type, color);
 }

@@ -9,7 +9,7 @@ public class RunningState : LocomotionState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Cyan);
+        SetStateInfo(GetType(), TextColor.Cyan);
 
         Data.Speed = _config.Speed;
     }

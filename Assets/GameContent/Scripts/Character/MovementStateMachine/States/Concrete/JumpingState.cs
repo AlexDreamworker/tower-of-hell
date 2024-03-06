@@ -11,7 +11,7 @@ public class JumpingState : AirborneState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Yellow);
+        SetStateInfo(GetType(), TextColor.Yellow);
 
         Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
 

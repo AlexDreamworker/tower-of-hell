@@ -7,7 +7,7 @@ public class CrouchingState : CrouchedState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Orange);
+        SetStateInfo(GetType(), TextColor.Orange);
 
         Data.Speed = 0;
     }

@@ -9,7 +9,7 @@ public class WalkingState : LocomotionState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Blue);
+        SetStateInfo(GetType(), TextColor.Blue);
 
         var x = GetType();
 

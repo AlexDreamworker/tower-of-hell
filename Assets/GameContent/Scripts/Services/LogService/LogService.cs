@@ -8,6 +8,9 @@ public class LogService : ILogService
         => Debug.Log(message);
 
     public void Log(string message, string color)
+        => Debug.Log($"<color={color}>{message}</color>");
+
+    public void LogState(string message, string color)
         => Debug.Log($"<color={color}>{message.Replace(_replaceStateMessage, "").ToUpper()}</color>");
 
     public void LogError(string message) 

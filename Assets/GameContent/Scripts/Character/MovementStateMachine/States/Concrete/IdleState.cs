@@ -7,7 +7,7 @@ public class IdleState : StandedState
     {
         base.Enter();
 
-        LogStateInfo(GetType(), TextColor.Lime);
+        SetStateInfo(GetType(), TextColor.Lime);
 
         Data.Speed = 0;
     }

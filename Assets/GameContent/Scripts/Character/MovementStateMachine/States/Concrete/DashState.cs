@@ -18,7 +18,7 @@ public class DashState : BaseState
 
     public override void Enter()
     {
-        LogStateInfo(GetType(), TextColor.Purple);
+        SetStateInfo(GetType(), TextColor.Purple);
 
         _monoProvider.StartCoroutine(DashRoutine());
     }
