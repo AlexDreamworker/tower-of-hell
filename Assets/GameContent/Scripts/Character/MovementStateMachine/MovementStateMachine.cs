@@ -16,12 +16,12 @@ public class MovementStateMachine : IStateSwitcher
         {
             new IdleState(this, data, character),
             new WalkingState(this, data, character),
+            new RunningState(this, data, character),
             new FallingState(this, data, character),
             new JumpingState(this, data, character),
             new CrouchingState(this, data, character),
             new DuckingState(this, data, character),
             new DashState(this, data, character),
-            new RunningState(this, data, character) //???
         };
 
         _currentState = _states[0];

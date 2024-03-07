@@ -4,6 +4,9 @@ using UnityEngine;
 public class CharacterConfig : ScriptableObject
 {
     [Space]
+    [SerializeField] private CharacterCameraConfig _cameraConfig;
+
+    [Space]
     [SerializeField] private GroundedStateConfig _groundedStateConfig;
 
     [Space]
@@ -12,6 +15,7 @@ public class CharacterConfig : ScriptableObject
     [Space]
     [SerializeField] private DashStateConfig _dashStateConfig;
 
+    public CharacterCameraConfig CameraConfig => _cameraConfig;
     public GroundedStateConfig GroundedStateConfig => _groundedStateConfig;
     public AirborneStateConfig AirborneStateConfig => _airborneStateConfig;
     public DashStateConfig DashStateConfig => _dashStateConfig;
