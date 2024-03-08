@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Character : MonoBehaviour //TODO: Create and inject camera!
+public class Character : MonoBehaviour
 {
     [Space]
     [SerializeField] private Transform _cameraPoint;

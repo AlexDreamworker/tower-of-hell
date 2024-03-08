@@ -3,44 +3,16 @@ using UnityEngine;
 
 public class MovementStateMachineData
 {
-    //?public float XVelocity;
-    //?public float YVelocity;
-
-    public Vector3 MoveDirection; //!!!
-
+    private Vector3 _moveDirection;
     private float _speed;
+    private float _yScale;
+    private float _dashCooldownTimer;
+    private int _jumpsCount;
 
-    private float _xInput; //? VERTICAL?
-    private float _yInput; //? HORIZONTAL?
-
-    public int JumpsCount; //!!!
-    public float YScale; //!!!
-    //?public bool IsCrouching; //!!!
-
-    public float DashCooldownTimer; //!!!
-
-    public float XInput
+    public Vector3 MoveDirection
     {
-        get => _xInput;
-        set
-        {
-            if(value < -1 || value > 1)
-                throw new ArgumentOutOfRangeException(nameof(value));
-
-            _xInput = value;
-        }
-    }
-
-    public float YInput 
-    {
-        get => _yInput;
-        set
-        {
-            if(value < -1 || value > 1)
-                throw new ArgumentOutOfRangeException(nameof(value));
-
-            _yInput = value;
-        }
+        get => _moveDirection;
+        set => _moveDirection = value;
     }
 
     public float Speed
@@ -52,6 +24,42 @@ public class MovementStateMachineData
                 throw new ArgumentOutOfRangeException(nameof(value));
 
             _speed = value;
+        }
+    }
+
+    public float YScale 
+    {
+        get => _yScale;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value));
+
+            _yScale = value;
+        }
+    }
+
+    public float DashCooldownTimer
+    {
+        get => _dashCooldownTimer;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value));
+
+            _dashCooldownTimer = value;
+        }
+    }
+
+    public int JumpsCount
+    {
+        get => _jumpsCount;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(value));
+
+            _jumpsCount = value;
         }
     }
 }

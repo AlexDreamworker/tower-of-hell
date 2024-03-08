@@ -2,19 +2,22 @@ using UnityEngine;
 
 public abstract class MovementState : BaseState
 {
-    protected MovementState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) 
-        : base(stateSwitcher, data, character) { }
+    private readonly MovementStateConfig _config;
 
-    public override void HandleInput() //TODO: change X and Y to Vector2?
+    protected MovementState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
+        => _config = character.Config.MovementStateConfig;
+
+    public override void HandleInput()
     {
-        Data.XInput = ReadHorizontalInput();
-        Data.YInput = ReadVerticalInput();
+        base.HandleInput();
 
-        Data.MoveDirection = Transform.forward * Data.YInput + Transform.right * Data.XInput;
+        Data.MoveDirection = Transform.forward * Input.Movement.y + Transform.right * Input.Movement.x;
     }
 
     public override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         MoveRigidbody();
         LimitFlatVelocity();
         ApplyAdditionalGravity();   
@@ -22,14 +25,11 @@ public abstract class MovementState : BaseState
 
     protected bool IsMovementInputZero() => Input.Movement == Vector2.zero;
 
-    private float ReadHorizontalInput() => Input.Movement.x;
-    private float ReadVerticalInput() => Input.Movement.y;
+    private void MoveRigidbody()
+        => Rigidbody.AddForce(Data.MoveDirection.normalized * Data.Speed * _config.SpeedMultiplier, ForceMode.Force);
 
-    private void MoveRigidbody() //TODO: remove magic number
-        => Rigidbody.AddForce(Data.MoveDirection.normalized * Data.Speed * 10f, ForceMode.Force);
-
-    private void ApplyAdditionalGravity() //TODO: remove magic number
-        => Rigidbody.AddForce(Vector3.down * 10f, ForceMode.Force);
+    private void ApplyAdditionalGravity()
+        => Rigidbody.AddForce(Vector3.down * _config.AdditionalGravity, ForceMode.Force);
 
     private void LimitFlatVelocity() 
     {
