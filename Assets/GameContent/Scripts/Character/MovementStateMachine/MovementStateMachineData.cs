@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//TODO: Rename to CHARACTER_DATA
 public class MovementStateMachineData
 {
     private Vector3 _moveDirection;

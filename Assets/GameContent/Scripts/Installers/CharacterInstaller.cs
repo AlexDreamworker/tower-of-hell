@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +12,11 @@ public class CharacterInstaller : MonoInstaller
     {
         BindCharacterConfig();
         BindCharacterCamera();
+        BingMovementStateMachine();
+        BindMovementStateMachineData();
         BingCharacter();
+        BindStates();
+        BindMovementStateMachineProvider();
     }
 
     private void BindCharacterConfig()
@@ -21,6 +24,12 @@ public class CharacterInstaller : MonoInstaller
 
     private void BindCharacterCamera()
         => Container.Bind<CharacterCamera>().FromInstance(_camera).AsSingle();
+
+    private void BingMovementStateMachine()
+        => Container.BindInterfacesAndSelfTo<MovementStateMachine>().AsSingle();
+
+    private void BindMovementStateMachineData()
+        => Container.Bind<MovementStateMachineData>().AsSingle();
 
     private void BingCharacter()
     {
@@ -32,5 +41,22 @@ public class CharacterInstaller : MonoInstaller
         );
 
         Container.BindInterfacesAndSelfTo<Character>().FromInstance(player).AsSingle();
+    }
+
+    private void BindStates() 
+    {
+        Container.BindInterfacesAndSelfTo<IdleState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<WalkingState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<RunningState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<FallingState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<JumpingState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<CrouchingState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<DuckingState>().AsSingle();
+        Container.BindInterfacesAndSelfTo<DashState>().AsSingle();
+    }
+
+    private void BindMovementStateMachineProvider() 
+    {
+        Container.Bind<MovementStateMachineProvider>().AsSingle().NonLazy();
     }
 }

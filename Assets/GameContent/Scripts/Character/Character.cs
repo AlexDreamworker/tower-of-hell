@@ -17,23 +17,27 @@ public class Character : MonoBehaviour
     private ILogService _log;
     private CharacterConfig _config;
     private CharacterCamera _camera;
-
     private MovementStateMachine _stateMachine;
+
     private Rigidbody _rigidbody;
 
     [Inject]
-    private void Construct(IInputService input, ILogService log, CharacterConfig config, CharacterCamera camera) 
+    private void Construct(
+        IInputService input, 
+        ILogService log, 
+        CharacterConfig config, 
+        CharacterCamera camera, 
+        MovementStateMachine stateMachine) 
     {
         _input = input;
         _log = log;
         _config = config;
         _camera = camera;
+        _stateMachine = stateMachine;
 
-        _camera.Initialization(transform, _cameraPoint);
+        _camera.Initialize(transform, _cameraPoint);
+
         _rigidbody = GetComponent<Rigidbody>();
-
-        //TODO: move init StateMachine
-        _stateMachine = new MovementStateMachine(this);
     }
 
     public IInputService Input => _input;

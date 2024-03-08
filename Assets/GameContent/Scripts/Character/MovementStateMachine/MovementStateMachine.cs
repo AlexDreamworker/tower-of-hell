@@ -7,25 +7,16 @@ public class MovementStateMachine : IStateSwitcher
     private List<IState> _states;
     private IState _currentState;
 
-    //TODO: вынести инициализацию в другое место, передавать список состояний + первое состояние.
-    public MovementStateMachine(Character character) 
-    {
-        MovementStateMachineData data = new MovementStateMachineData();
+    private bool _isInit;
 
-        _states = new List<IState>() 
-        {
-            new IdleState(this, data, character),
-            new WalkingState(this, data, character),
-            new RunningState(this, data, character),
-            new FallingState(this, data, character),
-            new JumpingState(this, data, character),
-            new CrouchingState(this, data, character),
-            new DuckingState(this, data, character),
-            new DashState(this, data, character),
-        };
+    public void Initialize(List<IState> states) 
+    {
+        _states = states;
 
         _currentState = _states[0];
         _currentState.Enter();
+
+        _isInit = true;
     }
 
     public void SwitchState<T>() where T : IState
@@ -43,9 +34,27 @@ public class MovementStateMachine : IStateSwitcher
         _currentState.Enter();
     }
 
-    public void HandleInput() => _currentState.HandleInput();
+    public void HandleInput()
+    {
+        if (_isInit == false)
+            return;
 
-    public void Update() => _currentState.Update();
+        _currentState.HandleInput();
+    }
 
-    public void FixedUpdate() => _currentState.FixedUpdate();
+    public void Update()
+    {
+        if (_isInit == false)
+            return;
+
+        _currentState.Update();
+    }
+
+    public void FixedUpdate()
+    {
+        if (_isInit == false)
+            return;
+
+        _currentState.FixedUpdate();
+    }
 }
