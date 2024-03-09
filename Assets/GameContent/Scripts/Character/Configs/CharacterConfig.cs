@@ -7,6 +7,9 @@ public class CharacterConfig : ScriptableObject
     [SerializeField] private CharacterCameraConfig _cameraConfig;
 
     [Space]
+    [SerializeField] private CharacterStaminaConfig _staminaConfig;
+
+    [Space]
     [SerializeField] private MovementStateConfig _movementStateConfig;
 
     [Space]
@@ -19,6 +22,7 @@ public class CharacterConfig : ScriptableObject
     [SerializeField] private DashStateConfig _dashStateConfig;
 
     public CharacterCameraConfig CameraConfig => _cameraConfig;
+    public CharacterStaminaConfig StaminaConfig => _staminaConfig;
     public MovementStateConfig MovementStateConfig => _movementStateConfig;
     public GroundedStateConfig GroundedStateConfig => _groundedStateConfig;
     public AirborneStateConfig AirborneStateConfig => _airborneStateConfig;

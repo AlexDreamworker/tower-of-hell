@@ -58,9 +58,9 @@ public class CharacterCamera : MonoBehaviour, ICamera
         _character.rotation = Quaternion.Euler(0, _yRotation, 0);
     }
 
-    private void UpdatePosition() => transform.position = _targetPoint.position;
-
     public void SetFOV(float value, float time) => _camera.DOFieldOfView(value, time);
 
     public void ResetFOV(float time) => _camera.DOFieldOfView(_config.NormalFOV, time);
+
+    private void UpdatePosition() => transform.position = _targetPoint.position;
 }

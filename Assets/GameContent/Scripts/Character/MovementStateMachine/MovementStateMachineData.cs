@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
+using Zenject;
 
-//TODO: Rename to CHARACTER_DATA
-public class MovementStateMachineData
+//TODO: Rename to CHARACTER_DATA???
+public class MovementStateMachineData /*: ITickable*/
 {
     private Vector3 _moveDirection;
     private float _speed;
@@ -63,4 +64,38 @@ public class MovementStateMachineData
             _jumpsCount = value;
         }
     }
+
+// //!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//     //? CONFIG DATA:
+//     public const int MAX_STAMINA = 3;
+//     public const int DASH_RATE = 1;
+
+//     //? DYNAMIC DATA:
+//     private float CurrentStamina = MAX_STAMINA;
+
+//     //? LOGIC:
+//     public void Tick()
+//     {
+//         Debug.Log($"STAMINA: {CurrentStamina}");
+
+//         if (CurrentStamina < MAX_STAMINA)
+//         {
+//             CurrentStamina += 0.4f * Time.deltaTime;
+//         }
+//         else if (CurrentStamina > MAX_STAMINA)
+//         {
+//             CurrentStamina = MAX_STAMINA;
+//         }
+//     }
+
+//     public bool CanDash() 
+//     {
+//         return CurrentStamina > DASH_RATE;
+//     }
+
+//     public void Decrease() 
+//     {
+//         CurrentStamina -= DASH_RATE;
+//     }
+// //!>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }

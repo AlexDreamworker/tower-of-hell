@@ -8,6 +8,8 @@ public class GroundedStateConfig
 
     [Space]
     [SerializeField] private StandedStateConfig _standedStateConfig;
+    
+    [Space]
     [SerializeField] private CrouchedStateConfig _crouchedStateConfig; 
 
     public float Drag => _drag;

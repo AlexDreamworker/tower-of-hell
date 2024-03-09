@@ -14,6 +14,7 @@ public class CharacterInstaller : MonoInstaller
         BindCharacterCamera();
         BingMovementStateMachine();
         BindMovementStateMachineData();
+        BindCharacterStamina();
         BingCharacter();
         BindStates();
         BindMovementStateMachineProvider();
@@ -30,6 +31,9 @@ public class CharacterInstaller : MonoInstaller
 
     private void BindMovementStateMachineData()
         => Container.Bind<MovementStateMachineData>().AsSingle();
+
+    private void BindCharacterStamina()
+        => Container.BindInterfacesAndSelfTo<CharacterStamina>().AsSingle();
 
     private void BingCharacter()
     {
@@ -55,8 +59,6 @@ public class CharacterInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<DashState>().AsSingle();
     }
 
-    private void BindMovementStateMachineProvider() 
-    {
-        Container.Bind<MovementStateMachineProvider>().AsSingle().NonLazy();
-    }
+    private void BindMovementStateMachineProvider()
+        => Container.Bind<MovementStateMachineProvider>().AsSingle().NonLazy();
 }

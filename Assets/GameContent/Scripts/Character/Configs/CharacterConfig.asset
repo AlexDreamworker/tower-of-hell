@@ -12,12 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8889e6fc8b3f454abc39162a4dc57de, type: 3}
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
+  _cameraConfig:
+    _xSensitivity: 400
+    _ySensitivity: 400
+    _xClampRotationMin: -90
+    _xClampRotationMax: 90
+    _normalFOV: 80
+  _movementStateConfig:
+    _speedMultiplier: 10
+    _additionalGravity: 10
   _groundedStateConfig:
-    _walkStateConfig:
-      _speed: 7
     _drag: 5
+    _standedStateConfig:
+      _yScale: 1
+      _walkingStateConfig:
+        _speed: 7
+      _runningStateConfig:
+        _speed: 12
+        _effectFOV: 100
+        _timeToSetFOV: 0.25
+        _timeToResetFOV: 0.25
+    _crouchedStateConfig:
+      _yScale: 0.5
+      _gravityForce: 5
+      _duckingStateConfig:
+        _speed: 5
   _airborneStateConfig:
-    _jumpStateConfig:
-      _force: 10
     _speed: 7
     _drag: 0
+    _maxJumpsCount: 2
+    _jumpingStateConfig:
+      _force: 10
+  _dashStateConfig:
+    _force: 40
+    _distance: 5
+    _cooldown: 1.5
+    _effectFOV: 100
+    _timeToSetFOV: 0.25
+    _timeToResetFOV: 0.25

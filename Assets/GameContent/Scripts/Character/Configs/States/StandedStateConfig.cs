@@ -8,6 +8,8 @@ public class StandedStateConfig
 
     [Space]
     [SerializeField] private WalkingStateConfig _walkingStateConfig;
+    
+    [Space]
     [SerializeField] private RunningStateConfig _runningStateConfig;
 
     public float YScale => _yScale;

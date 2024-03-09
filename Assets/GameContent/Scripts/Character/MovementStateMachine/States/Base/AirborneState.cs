@@ -3,9 +3,13 @@ using UnityEngine;
 public abstract class AirborneState : MovementState
 {
     private readonly AirborneStateConfig _config;
+    private readonly CharacterStamina _stamina;
 
     protected AirborneState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
-        => _config = character.Config.AirborneStateConfig;
+    {
+        _config = character.Config.AirborneStateConfig;
+        _stamina = character.Stamina;
+    }
 
     public override void Enter()
     {
@@ -39,5 +43,9 @@ public abstract class AirborneState : MovementState
         StateSwitcher.SwitchState<JumpingState>();
     }
 
-    private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();
+    private void OnDashKeyPressed()
+    {
+        if (_stamina.CanUse(StateType.Dash))
+            StateSwitcher.SwitchState<DashState>();
+    }
 }

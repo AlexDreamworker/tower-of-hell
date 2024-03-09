@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     private ILogService _log;
     private CharacterConfig _config;
     private CharacterCamera _camera;
+    private CharacterStamina _stamina;
     private MovementStateMachine _stateMachine;
 
     private Rigidbody _rigidbody;
@@ -26,13 +27,15 @@ public class Character : MonoBehaviour
         IInputService input, 
         ILogService log, 
         CharacterConfig config, 
-        CharacterCamera camera, 
+        CharacterCamera camera,
+        CharacterStamina stamina,
         MovementStateMachine stateMachine) 
     {
         _input = input;
         _log = log;
         _config = config;
         _camera = camera;
+        _stamina = stamina;
         _stateMachine = stateMachine;
 
         _camera.Initialize(transform, _cameraPoint);
@@ -48,6 +51,7 @@ public class Character : MonoBehaviour
     
     public Rigidbody Rigidbody => _rigidbody;
     public CharacterConfig Config => _config;
+    public CharacterStamina Stamina => _stamina;
     public Transform CameraPoint => _cameraPoint;
 
     private void Update()
@@ -58,6 +62,9 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate() => _stateMachine.FixedUpdate();
 
+    //TODO: enable Log!
     public void LogStateInfo(Type type, string color) 
-        => _log.LogState(type.ToString(), color);
+    {
+        //_log.LogState(type.ToString(), color);
+    }
 }

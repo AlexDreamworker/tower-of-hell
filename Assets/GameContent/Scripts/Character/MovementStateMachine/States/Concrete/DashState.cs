@@ -8,6 +8,7 @@ public class DashState : BaseState
     private readonly IObstacleDetector _groundDetector;
     private readonly IObstacleDetector _wallDetector;
     private readonly ICamera _camera;
+    private readonly CharacterStamina _stamina;
     
     public DashState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
     {
@@ -16,6 +17,7 @@ public class DashState : BaseState
         _groundDetector = character.GroundDetector;
         _wallDetector = character.WallDetector;
         _camera = character.Camera;
+        _stamina = character.Stamina;
     }
 
     public override void Enter()
@@ -23,6 +25,8 @@ public class DashState : BaseState
         SetStateInfo(GetType(), TextColor.Purple);
 
         _camera.SetFOV(_config.EffectFOV, _config.TimeToSetFOV);
+
+        _stamina.Use(StateType.Dash);
 
         _monoProvider.StartCoroutine(DashRoutine());
     }

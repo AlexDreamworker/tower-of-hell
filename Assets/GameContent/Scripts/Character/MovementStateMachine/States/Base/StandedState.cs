@@ -3,9 +3,13 @@ using UnityEngine;
 public abstract class StandedState : GroundedState
 {
     private readonly StandedStateConfig _config;
+    private readonly CharacterStamina _stamina;
 
     public StandedState(IStateSwitcher stateSwitcher, MovementStateMachineData data, Character character) : base(stateSwitcher, data, character)
-        => _config = character.Config.GroundedStateConfig.StandedStateConfig;
+    {
+        _config = character.Config.GroundedStateConfig.StandedStateConfig;
+        _stamina = character.Stamina;
+    }
 
     public override void Enter()
     {
@@ -37,5 +41,9 @@ public abstract class StandedState : GroundedState
 
     private void OnJumpKeyStarted() => StateSwitcher.SwitchState<JumpingState>();
 
-    private void OnDashKeyPressed() => StateSwitcher.SwitchState<DashState>();
+    private void OnDashKeyPressed()
+    {
+        if (_stamina.CanUse(StateType.Dash))
+            StateSwitcher.SwitchState<DashState>();
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class DashStateConfig
 {
-    [SerializeField, Range(0, 100)] private float _force = 50f;
+    [SerializeField, Range(0, 100)] private float _force = 40f;
     [SerializeField, Range(0, 5)] private float _distance = 5f;
     [SerializeField, Range(0, 5)] private float _cooldown = 1.5f; //???
     [SerializeField, Range(0, 150f)] private float _effectFOV = 100f;
