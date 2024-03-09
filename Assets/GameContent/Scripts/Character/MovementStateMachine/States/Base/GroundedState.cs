@@ -15,15 +15,14 @@ public abstract class GroundedState : MovementState
     {
         base.Enter();
 
+        Rigidbody.drag = _config.Drag;
         Data.JumpsCount = 0;
     }
 
     public override void Update()
     {
         base.Update();
-
-        Rigidbody.drag = _config.Drag;
-
+        
         if (_groundDetector.IsTouches == false)
             StateSwitcher.SwitchState<FallingState>();
     }

@@ -17,6 +17,16 @@ public class FallingState : AirborneState
         base.Update();
 
         if (_groundDetector.IsTouches)
-            StateSwitcher.SwitchState<IdleState>();
+        {
+            if (Input.IsJump)
+            {
+                Data.JumpsCount = 0;
+                StateSwitcher.SwitchState<JumpingState>();
+            }
+            else
+            {
+                StateSwitcher.SwitchState<IdleState>();
+            }
+        }
     }
 }

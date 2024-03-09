@@ -25,7 +25,6 @@ public class JumpingState : AirborneState
         base.Update();
 
         if (Rigidbody.velocity.y < 0f)
-
             StateSwitcher.SwitchState<FallingState>();
     }
 }

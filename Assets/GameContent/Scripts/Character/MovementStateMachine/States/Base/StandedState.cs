@@ -15,14 +15,6 @@ public abstract class StandedState : GroundedState
         Transform.localScale = new Vector3(Transform.localScale.x, Data.YScale, Transform.localScale.z);
     }
 
-    public override void Update()
-    {
-        base.Update();
-
-        if (Input.IsJump)
-            StateSwitcher.SwitchState<JumpingState>();
-    }
-
     protected override void AddInputActionCallbacks() 
     { 
         base.AddInputActionCallbacks();

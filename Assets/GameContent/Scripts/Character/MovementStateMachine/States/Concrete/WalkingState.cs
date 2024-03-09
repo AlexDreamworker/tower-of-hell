@@ -11,8 +11,6 @@ public class WalkingState : LocomotionState
 
         SetStateInfo(GetType(), TextColor.Blue);
 
-        var x = GetType();
-
         Data.Speed = _config.Speed;
     }
 
