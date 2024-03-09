@@ -18,7 +18,7 @@ public class WalkingState : LocomotionState
     {
         base.Update();
 
-        if (Input.IsSprint)
+        if (Input.IsWalk == false)
             StateSwitcher.SwitchState<RunningState>();
     }
 }

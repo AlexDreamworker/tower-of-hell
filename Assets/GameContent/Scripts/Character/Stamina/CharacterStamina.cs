@@ -15,6 +15,8 @@ public class CharacterStamina : ITickable
         _currentStamina = _config.Max;
     }
 
+    public float Stamina => _currentStamina;
+
     public void Tick()
     {
         Debug.Log($"STAMINA: {_currentStamina}");

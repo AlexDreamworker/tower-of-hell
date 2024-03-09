@@ -19,9 +19,9 @@ public class IdleState : StandedState
         if (IsMovementInputZero())
             return;
 
-        if (Input.IsSprint)
-            StateSwitcher.SwitchState<RunningState>();
-        else 
+        if (Input.IsWalk)
             StateSwitcher.SwitchState<WalkingState>();
+        else 
+            StateSwitcher.SwitchState<RunningState>();
     }
 }

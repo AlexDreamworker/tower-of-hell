@@ -22,32 +22,32 @@ public class DesktopInputService : IInputService, ITickable
     private Vector2 _movement;
     private Vector2 _look;
     private bool _isJump;
-    private bool _isSprint;
+    private bool _isWalk;
 
     public Vector2 Movement => _movement;
     public Vector2 Look => _look;
     public bool IsJump => _isJump;
-    public bool IsSprint => _isSprint;
+    public bool IsWalk => _isWalk;
 
     public void Tick()
     {
-        //TODO: naming!
-        ProcessMovementChange();
-        ProcessLookChange();
-        ProcessJumpPressing();
-        ProcessCrouchPressed();
-        ProcessSprintPressing();
-        ProcessDashPressed();
-        ProcessPausePressed();
+        ReadAxisMovement();
+        ReadAxisLook();
+
+        ReadKeyJump();
+        ReadKeyCrouch();
+        ReadKeyWalk();
+        ReadKeyDash();
+        ReadKeyPause();
     }
 
-    private void ProcessMovementChange()
+    private void ReadAxisMovement()
         => _movement = new Vector2(Input.GetAxisRaw(HorizontalAxisKey), Input.GetAxisRaw(VerticalAxisKey));
 
-    private void ProcessLookChange()
+    private void ReadAxisLook()
         => _look = new Vector2(Input.GetAxis(MouseXKey), Input.GetAxis(MouseYKey));
 
-    private void ProcessJumpPressing()
+    private void ReadKeyJump()
     {
         if (Input.GetButtonDown(JumpKey))
             JumpKeyStarted?.Invoke();
@@ -58,22 +58,22 @@ public class DesktopInputService : IInputService, ITickable
             JumpKeyPerformed?.Invoke();
     }
 
-    private void ProcessCrouchPressed() 
+    private void ReadKeyCrouch() 
     {
         if (Input.GetKeyDown(KeyCode.C))
             CrouchKeyPressed?.Invoke();
     }
 
-    private void ProcessSprintPressing()
-        => _isSprint = Input.GetKey(KeyCode.LeftShift);
+    private void ReadKeyWalk()
+        => _isWalk = Input.GetKey(KeyCode.LeftShift);
 
-    private void ProcessDashPressed()
+    private void ReadKeyDash()
     {
         if (Input.GetKeyDown(KeyCode.E))
             DashKeyPressed?.Invoke();
     }
 
-    private void ProcessPausePressed()
+    private void ReadKeyPause()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
             PauseKeyPressed?.Invoke();

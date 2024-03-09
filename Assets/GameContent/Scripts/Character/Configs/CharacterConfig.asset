@@ -18,6 +18,10 @@ MonoBehaviour:
     _xClampRotationMin: -90
     _xClampRotationMax: 90
     _normalFOV: 80
+  _staminaConfig:
+    _max: 3
+    _dashRate: 1
+    _increaseMultiplier: 0.4
   _movementStateConfig:
     _speedMultiplier: 10
     _additionalGravity: 10
@@ -26,17 +30,17 @@ MonoBehaviour:
     _standedStateConfig:
       _yScale: 1
       _walkingStateConfig:
-        _speed: 7
+        _speed: 3
       _runningStateConfig:
-        _speed: 12
-        _effectFOV: 100
+        _speed: 7
+        _effectFOV: 85
         _timeToSetFOV: 0.25
         _timeToResetFOV: 0.25
     _crouchedStateConfig:
       _yScale: 0.5
       _gravityForce: 5
       _duckingStateConfig:
-        _speed: 5
+        _speed: 4
   _airborneStateConfig:
     _speed: 7
     _drag: 0
