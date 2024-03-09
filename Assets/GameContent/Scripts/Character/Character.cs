@@ -44,6 +44,7 @@ public class Character : MonoBehaviour
     public IObstacleDetector GroundDetector => _groundDetector;
     public IObstacleDetector RoofDetector => _roofDetector;
     public IObstacleDetector WallDetector => _wallDetector;
+    public ICamera Camera => _camera;
     
     public Rigidbody Rigidbody => _rigidbody;
     public CharacterConfig Config => _config;

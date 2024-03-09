@@ -1,12 +1,12 @@
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(Camera))]
-public class CharacterCamera : MonoBehaviour
+public class CharacterCamera : MonoBehaviour, ICamera
 {
     private IInputService _input;
     private CharacterCameraConfig _config;
-    private MovementStateMachineData _data;
     private Transform _character;
     private Transform _targetPoint;
     private Camera _camera;
@@ -17,11 +17,10 @@ public class CharacterCamera : MonoBehaviour
     private bool _isInit;
 
     [Inject]
-    private void Construct(IInputService input, CharacterConfig config, MovementStateMachineData data) 
+    private void Construct(IInputService input, CharacterConfig config) 
     {
         _input = input;
         _config = config.CameraConfig;
-        _data = data;
 
         _camera = GetComponent<Camera>();
     }
@@ -61,10 +60,7 @@ public class CharacterCamera : MonoBehaviour
 
     private void UpdatePosition() => transform.position = _targetPoint.position;
 
-    //TODO: Implement camera effects without DOTween.
+    public void SetFOV(float value, float time) => _camera.DOFieldOfView(value, time);
 
-    // public void DoFov(float endValue) 
-    // {
-    //     GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);
-    // }
+    public void ResetFOV(float time) => _camera.DOFieldOfView(_config.NormalFOV, time);
 }
