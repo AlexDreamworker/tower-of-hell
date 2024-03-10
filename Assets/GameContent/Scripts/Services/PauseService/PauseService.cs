@@ -4,6 +4,8 @@ using Zenject;
 
 public class PauseService : IPauseService, IDisposable
 {
+    public event Action<bool> PauseChanged;
+
     private const float NormalTimeScale = 1f;
 
     private IInputService _input;
@@ -31,5 +33,7 @@ public class PauseService : IPauseService, IDisposable
         Time.timeScale = _isPaused ? 0 : NormalTimeScale;
 
         _cursor.Visible(_isPaused);
+
+        PauseChanged?.Invoke(_isPaused);
     } 
 }

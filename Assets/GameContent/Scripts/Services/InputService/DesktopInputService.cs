@@ -24,6 +24,8 @@ public class DesktopInputService : IInputService, ITickable
     private bool _isJump;
     private bool _isWalk;
 
+    private bool _isEnable;
+
     public Vector2 Movement => _movement;
     public Vector2 Look => _look;
     public bool IsJump => _isJump;
@@ -31,6 +33,9 @@ public class DesktopInputService : IInputService, ITickable
 
     public void Tick()
     {
+        if (_isEnable == false) 
+            return;
+            
         ReadAxisMovement();
         ReadAxisLook();
 
@@ -40,6 +45,10 @@ public class DesktopInputService : IInputService, ITickable
         ReadKeyDash();
         ReadKeyPause();
     }
+
+    public void Enable() => _isEnable = true;
+
+    public void Disable() => _isEnable = false;
 
     private void ReadAxisMovement()
         => _movement = new Vector2(Input.GetAxisRaw(HorizontalAxisKey), Input.GetAxisRaw(VerticalAxisKey));

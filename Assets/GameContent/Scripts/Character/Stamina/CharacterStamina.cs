@@ -15,7 +15,8 @@ public class CharacterStamina : ITickable
         _currentStamina = _config.Max;
     }
 
-    public float Stamina => _currentStamina;
+    public float Current => _currentStamina;
+    public float Max => _config.Max;
 
     public void Tick()
     {
@@ -33,9 +34,7 @@ public class CharacterStamina : ITickable
     }
 
     public void Use(StateType state) 
-    {
-        _currentStamina -= Rate(state);
-    }
+        => _currentStamina -= Rate(state);
 
     private int Rate(StateType state) 
     {

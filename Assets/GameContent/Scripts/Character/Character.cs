@@ -38,9 +38,13 @@ public class Character : MonoBehaviour
         _stamina = stamina;
         _stateMachine = stateMachine;
 
+        _rigidbody = GetComponent<Rigidbody>();
+
+        //TODO: move to LEVEL
         _camera.Initialize(transform, _cameraPoint);
 
-        _rigidbody = GetComponent<Rigidbody>();
+        //TODO: move to LEVEL
+        _input.Enable();
     }
 
     public IInputService Input => _input;

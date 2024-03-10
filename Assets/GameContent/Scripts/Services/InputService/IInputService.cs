@@ -16,4 +16,7 @@ public interface IInputService
     Vector2 Look { get; }
     bool IsJump { get; }
     bool IsWalk { get; }
+
+    void Enable();
+    void Disable();
 }
