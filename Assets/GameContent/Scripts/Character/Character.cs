@@ -66,9 +66,6 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate() => _stateMachine.FixedUpdate();
 
-    //TODO: enable Log!
-    public void LogStateInfo(Type type, string color) 
-    {
-        //_log.LogState(type.ToString(), color);
-    }
+    public void LogStateInfo(Type type, string color)
+        => _log.LogState(type.ToString(), color);
 }

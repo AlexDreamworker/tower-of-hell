@@ -4,6 +4,8 @@ using Zenject;
 
 public class CharacterStamina : ITickable
 {
+    public event Action ValueChanged;
+
     private float _currentStamina;
 
     private CharacterStaminaConfig _config;
@@ -20,8 +22,6 @@ public class CharacterStamina : ITickable
 
     public void Tick()
     {
-        Debug.Log($"STAMINA: {_currentStamina}");
-
         if (_currentStamina < _config.Max)
             _currentStamina += _config.IncreaseMultiplier * Time.deltaTime;
         else if (_currentStamina > _config.Max)
@@ -34,7 +34,10 @@ public class CharacterStamina : ITickable
     }
 
     public void Use(StateType state) 
-        => _currentStamina -= Rate(state);
+    {
+        _currentStamina -= Rate(state);
+        ValueChanged?.Invoke();
+    } 
 
     private int Rate(StateType state) 
     {

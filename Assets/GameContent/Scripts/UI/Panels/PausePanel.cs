@@ -1,13 +1,22 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 public class PausePanel : MonoBehaviour
 {
+    [Space]
     [SerializeField] private GameObject _context;
+
+    [Space]
     [SerializeField] private Button _buttonContinue;
+    [SerializeField, Range(0, 3f)] private float _normalScale = 1f;
+    [SerializeField, Range(0, 3f)] private float _animationScale = 1.2f;
+    [SerializeField, Range(0, 5f)] private float _animationDuration = 2f;
 
     private IPauseService _pauseService;
+
+    private Tween _animationSequence;
 
     [Inject]
     private void Construct(IPauseService pauseService) 
@@ -19,6 +28,10 @@ public class PausePanel : MonoBehaviour
     {
         _pauseService.PauseChanged += OnPauseChanged;
         _buttonContinue.onClick.AddListener(ContinueCallback);
+
+        TweenAnimation();
+        
+        _animationSequence.Pause();
     }
 
     private void OnDisable()
@@ -27,9 +40,27 @@ public class PausePanel : MonoBehaviour
         _buttonContinue.onClick.RemoveListener(ContinueCallback);
     }
 
-    private void OnPauseChanged(bool isPause) 
-        => _context.SetActive(isPause);
+    private void OnPauseChanged(bool isPause)
+    {
+        if (isPause)
+            _animationSequence.Play();
+        else 
+            _animationSequence.Pause();
+        
+        _context.SetActive(isPause);
+    }
 
     private void ContinueCallback() 
         => _pauseService.SetPause(false);
+
+    private void TweenAnimation() 
+    {
+        _animationSequence = DOTween.Sequence()
+            .Append(_buttonContinue.gameObject.transform.DOScale(_animationScale, _animationDuration))
+            .SetEase(Ease.InSine)
+            .Append(_buttonContinue.gameObject.transform.DOScale(_normalScale, _animationDuration))
+            .SetEase(Ease.OutSine)
+            .SetUpdate(UpdateType.Normal, true)
+            .SetLoops(-1, LoopType.Yoyo);
+    }
 }
