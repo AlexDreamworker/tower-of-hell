@@ -15,7 +15,7 @@ public class CharacterInstaller : MonoInstaller
         BingMovementStateMachine();
         BindMovementStateMachineData();
         BindCharacterStamina();
-        BingCharacter();
+        BindCharacter();
         BindStates();
         BindMovementStateMachineProvider();
     }
@@ -35,7 +35,7 @@ public class CharacterInstaller : MonoInstaller
     private void BindCharacterStamina()
         => Container.BindInterfacesAndSelfTo<CharacterStamina>().AsSingle();
 
-    private void BingCharacter()
+    private void BindCharacter()
     {
         Character player = Container.InstantiatePrefabForComponent<Character>(
             _prefab, 

@@ -17,7 +17,6 @@ public class DesktopInputService : IInputService, ITickable
     private const string HorizontalAxisKey = "Horizontal";
     private const string MouseXKey = "Mouse X";
     private const string MouseYKey = "Mouse Y";
-    private const string JumpKey = "Jump";
 
     private Vector2 _movement;
     private Vector2 _look;
@@ -58,12 +57,12 @@ public class DesktopInputService : IInputService, ITickable
 
     private void ReadKeyJump()
     {
-        if (Input.GetButtonDown(JumpKey))
+        if (Input.GetKeyDown(KeyCode.Space))
             JumpKeyStarted?.Invoke();
 
-        _isJump = Input.GetButton(JumpKey);
+        _isJump = Input.GetKey(KeyCode.Space);
 
-        if (Input.GetButtonUp(JumpKey))
+        if (Input.GetKeyUp(KeyCode.Space))
             JumpKeyPerformed?.Invoke();
     }
 

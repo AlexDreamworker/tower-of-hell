@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Zenject;
 
 public class PauseService : IPauseService, IDisposable
 {
@@ -13,8 +12,7 @@ public class PauseService : IPauseService, IDisposable
 
     private bool _isPaused;
 
-    [Inject]
-    private void Construct(IInputService input, ICursorService cursor) 
+    private PauseService(IInputService input, ICursorService cursor) 
     {
         _input = input;
         _cursor = cursor;
@@ -27,13 +25,27 @@ public class PauseService : IPauseService, IDisposable
     public void Dispose()
         => _input.PauseKeyPressed -= OnPauseKeyPressed;
 
-    private void OnPauseKeyPressed()
+    public void SetPause(bool isPause) 
     {
-        _isPaused = !_isPaused;
+        _isPaused = isPause;
+
         Time.timeScale = _isPaused ? 0 : NormalTimeScale;
 
         _cursor.Visible(_isPaused);
 
         PauseChanged?.Invoke(_isPaused);
+    }
+
+    private void OnPauseKeyPressed()
+    {
+        _isPaused = !_isPaused;
+
+        SetPause(_isPaused);
+        
+        // Time.timeScale = _isPaused ? 0 : NormalTimeScale;
+
+        // _cursor.Visible(_isPaused);
+
+        // PauseChanged?.Invoke(_isPaused);
     } 
 }
