@@ -14,13 +14,15 @@ public class ServiceInstaller : MonoInstaller
         BindMobileInputView();
     }
 
-    //TODO: mobile input test
     private void BindInputService() 
     {
-        if (Application.isMobilePlatform) 
-            Container.BindInterfacesAndSelfTo<MobileInputService>().AsSingle();
-        else 
-            Container.BindInterfacesAndSelfTo<DesktopInputService>().AsSingle();
+        // if (Application.isMobilePlatform) 
+        //     Container.BindInterfacesAndSelfTo<MobileInputService>().AsSingle();
+        // else 
+        //     Container.BindInterfacesAndSelfTo<DesktopInputService>().AsSingle();
+
+//TODO: mobile input test
+        Container.BindInterfacesAndSelfTo<MobileInputService>().AsSingle();
     }
 
     private void BindCursorService() 
@@ -32,10 +34,12 @@ public class ServiceInstaller : MonoInstaller
     private void BindLogService() 
         => Container.BindInterfacesTo<LogService>().AsSingle();
 
-    //TODO: mobile input test
     private void BindMobileInputView() 
     {
-        if (Application.isMobilePlatform)
-            Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
+        // if (Application.isMobilePlatform)
+        //     Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
+
+//TODO: mobile input test
+        Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
     }
 }

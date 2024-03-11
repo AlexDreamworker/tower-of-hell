@@ -260,7 +260,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   _distanceToCheck: 0.45
-  _debug: 0
+  _debug: 1
 --- !u!1 &7000241022383102501
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83233c225e97ac348b66f20adc63a0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: e157036bbd79d6b4c81901fcda10d800, type: 2}
   _cameraPoint: {fileID: 8918040972073375790}
   _groundDetector: {fileID: 1445429731163426433}
   _roofDetector: {fileID: 278577115093946569}
