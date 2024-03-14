@@ -6,6 +6,7 @@ using Zenject;
 public class Character : MonoBehaviour
 {
     [Space]
+    [SerializeField] private CharacterView _view;
     [SerializeField] private Transform _cameraPoint;
 
     [Space]
@@ -40,6 +41,8 @@ public class Character : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody>();
 
+        _view.Initialize();
+
         //TODO: move to LEVEL
         _camera.Initialize(transform, _cameraPoint);
 
@@ -55,6 +58,7 @@ public class Character : MonoBehaviour
     
     public Rigidbody Rigidbody => _rigidbody;
     public CharacterConfig Config => _config;
+    public CharacterView View => _view;
     public CharacterStamina Stamina => _stamina;
     public Transform CameraPoint => _cameraPoint;
 

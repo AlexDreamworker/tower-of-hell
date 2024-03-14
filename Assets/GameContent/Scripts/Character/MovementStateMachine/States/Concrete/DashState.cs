@@ -24,6 +24,8 @@ public class DashState : BaseState
     {
         SetStateInfo(GetType(), TextColor.Purple);
 
+        View.StartIdling();
+
         _camera.SetFOV(_config.EffectFOV, _config.TimeToSetFOV);
 
         _stamina.Use(StateType.Dash);
@@ -34,6 +36,8 @@ public class DashState : BaseState
     public override void Exit()
     {
         base.Exit();
+
+        View.StopIdling();
 
         _camera.ResetFOV(_config.TimeToResetFOV);
     }

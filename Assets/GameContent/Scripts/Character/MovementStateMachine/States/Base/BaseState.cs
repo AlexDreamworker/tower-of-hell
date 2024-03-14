@@ -16,6 +16,7 @@ public abstract class BaseState : IState
     }
 
     protected IInputService Input => _character.Input;
+    protected CharacterView View => _character.View;
     protected Rigidbody Rigidbody => _character.Rigidbody;
     protected Transform Transform => _character.transform;
 

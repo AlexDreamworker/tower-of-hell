@@ -11,7 +11,16 @@ public class DuckingState : CrouchedState
 
         SetStateInfo(GetType(), TextColor.White);
 
+        View.StartWalking();
+
         Data.Speed = _config.Speed;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopWalking();
     }
 
     public override void Update()

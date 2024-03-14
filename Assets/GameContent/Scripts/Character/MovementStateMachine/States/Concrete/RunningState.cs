@@ -15,6 +15,8 @@ public class RunningState : LocomotionState
 
         SetStateInfo(GetType(), TextColor.Cyan);
 
+        View.StartRunning();
+
         Data.Speed = _config.Speed;
 
         _camera.SetFOV(_config.EffectFOV, _config.TimeToSetFOV);
@@ -23,6 +25,8 @@ public class RunningState : LocomotionState
     public override void Exit()
     {
         base.Exit();
+
+        View.StopRunning();
 
         _camera.ResetFOV(_config.TimeToResetFOV);
     }

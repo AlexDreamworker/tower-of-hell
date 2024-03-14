@@ -10,6 +10,15 @@ public class FallingState : AirborneState
         base.Enter();
 
         SetStateInfo(GetType(), TextColor.Red);
+
+        View.StartIdling();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopIdling();
     }
 
     public override void Update()

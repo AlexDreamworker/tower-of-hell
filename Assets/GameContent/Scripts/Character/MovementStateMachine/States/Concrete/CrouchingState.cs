@@ -9,7 +9,16 @@ public class CrouchingState : CrouchedState
 
         SetStateInfo(GetType(), TextColor.Orange);
 
+        View.StartIdling();
+
         Data.Speed = 0;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopIdling();
     }
 
     public override void Update()

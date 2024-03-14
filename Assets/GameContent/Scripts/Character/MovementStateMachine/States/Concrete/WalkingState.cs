@@ -11,7 +11,16 @@ public class WalkingState : LocomotionState
 
         SetStateInfo(GetType(), TextColor.Blue);
 
+        View.StartWalking();
+
         Data.Speed = _config.Speed;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopWalking();
     }
 
     public override void Update()

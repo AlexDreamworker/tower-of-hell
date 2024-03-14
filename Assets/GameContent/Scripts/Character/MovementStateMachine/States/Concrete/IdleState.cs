@@ -9,7 +9,16 @@ public class IdleState : StandedState
 
         SetStateInfo(GetType(), TextColor.Lime);
 
+        View.StartIdling();
+
         Data.Speed = 0;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopIdling();
     }
 
     public override void Update()

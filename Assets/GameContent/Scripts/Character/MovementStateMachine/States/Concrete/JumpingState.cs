@@ -13,11 +13,20 @@ public class JumpingState : AirborneState
 
         SetStateInfo(GetType(), TextColor.Yellow);
 
+        View.StartIdling();
+
         Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0f, Rigidbody.velocity.z);
 
         Rigidbody.AddForce(Transform.up * _config.Force, ForceMode.Impulse);
 
         Data.JumpsCount++;
+    }
+    
+    public override void Exit()
+    {
+        base.Exit();
+
+        View.StopIdling();
     }
 
     public override void Update()
