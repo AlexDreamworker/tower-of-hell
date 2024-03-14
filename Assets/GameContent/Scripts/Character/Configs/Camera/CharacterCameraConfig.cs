@@ -6,8 +6,8 @@ public class CharacterCameraConfig
 {
     [SerializeField, Range(0, 1000f)] private float _xSensitivity = 400f;
     [SerializeField, Range(0, 1000f)] private float _ySensitivity = 400f;
-    [SerializeField, Range(-180f, 180f)] private float _xClampRotationMin = -90f;
-    [SerializeField, Range(-180f, 180f)] private float _xClampRotationMax = 90f;
+    [SerializeField, Range(-180f, 180f)] private float _xClampRotationMin = -60f;
+    [SerializeField, Range(-180f, 180f)] private float _xClampRotationMax = 75f;
     [SerializeField, Range(0, 150f)] private float _normalFOV = 80f;
 
     public float XSensitivity => _xSensitivity;

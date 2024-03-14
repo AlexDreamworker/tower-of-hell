@@ -15,8 +15,8 @@ MonoBehaviour:
   _cameraConfig:
     _xSensitivity: 400
     _ySensitivity: 400
-    _xClampRotationMin: -90
-    _xClampRotationMax: 90
+    _xClampRotationMin: -60
+    _xClampRotationMax: 75
     _normalFOV: 80
   _staminaConfig:
     _max: 3
@@ -50,7 +50,6 @@ MonoBehaviour:
   _dashStateConfig:
     _force: 40
     _distance: 5
-    _cooldown: 1.5
     _effectFOV: 100
     _timeToSetFOV: 0.25
     _timeToResetFOV: 0.25
