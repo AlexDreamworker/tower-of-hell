@@ -21,7 +21,7 @@ MonoBehaviour:
   _staminaConfig:
     _max: 3
     _dashRate: 1
-    _increaseMultiplier: 0.4
+    _increaseMultiplier: 0.1
   _movementStateConfig:
     _speedMultiplier: 10
     _additionalGravity: 10
@@ -42,7 +42,7 @@ MonoBehaviour:
       _duckingStateConfig:
         _speed: 4
   _airborneStateConfig:
-    _speed: 7
+    _speed: 4
     _drag: 0
     _maxJumpsCount: 2
     _jumpingStateConfig:

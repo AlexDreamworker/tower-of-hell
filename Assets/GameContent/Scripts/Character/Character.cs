@@ -43,11 +43,11 @@ public class Character : MonoBehaviour
 
         _view.Initialize();
 
-        //TODO: move to LEVEL
-        _camera.Initialize(transform, _cameraPoint);
+        // //TODO: move to LEVEL
+        // _camera.Initialize(transform, _cameraPoint);
 
-        //TODO: move to LEVEL
-        _input.Enable();
+        // //TODO: move to LEVEL
+        // _input.Enable();
     }
 
     public IInputService Input => _input;

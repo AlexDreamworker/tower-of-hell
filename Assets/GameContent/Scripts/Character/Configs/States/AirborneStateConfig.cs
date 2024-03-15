@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class AirborneStateConfig
 {
-    [SerializeField, Range(0, 100)] private float _speed = 7f;
+    [SerializeField, Range(0, 100)] private float _speed = 4f;
     [SerializeField, Range(0, 100)] private float _drag = 0f;
     [SerializeField, Range(0, 5)] private int _maxJumpsCount = 2;
 

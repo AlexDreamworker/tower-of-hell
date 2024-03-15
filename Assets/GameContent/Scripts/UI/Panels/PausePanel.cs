@@ -10,9 +10,11 @@ public class PausePanel : MonoBehaviour
 
     [Space]
     [SerializeField] private Button _buttonContinue;
+
+    //TODO: Duplicate code!
     [SerializeField, Range(0, 3f)] private float _normalScale = 1f;
-    [SerializeField, Range(0, 3f)] private float _animationScale = 1.2f;
-    [SerializeField, Range(0, 5f)] private float _animationDuration = 2f;
+    [SerializeField, Range(0, 3f)] private float _animationScale = 1.1f;
+    [SerializeField, Range(0, 5f)] private float _animationDuration = 0.5f;
 
     private IPauseService _pauseService;
 
@@ -53,6 +55,7 @@ public class PausePanel : MonoBehaviour
     private void ContinueCallback() 
         => _pauseService.SetPause(false);
 
+    //TODO: Move to button?
     private void TweenAnimation() 
     {
         _animationSequence = DOTween.Sequence()
