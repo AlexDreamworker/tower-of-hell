@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 351510855}
   - component: {fileID: 351510854}
   m_Layer: 5
-  m_Name: Separator
+  m_Name: Separator-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,7 +638,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -133, y: 0}
-  m_SizeDelta: {x: 5, y: 40}
+  m_SizeDelta: {x: 15, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351510854
 MonoBehaviour:
@@ -1710,7 +1710,7 @@ GameObject:
   - component: {fileID: 1193700658}
   - component: {fileID: 1193700657}
   m_Layer: 5
-  m_Name: Separator (1)
+  m_Name: Separator-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1733,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 133, y: 0}
-  m_SizeDelta: {x: 5, y: 40}
+  m_SizeDelta: {x: 15, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193700657
 MonoBehaviour:
