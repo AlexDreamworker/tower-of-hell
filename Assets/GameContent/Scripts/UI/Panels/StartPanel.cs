@@ -28,6 +28,7 @@ public class StartPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        _context.transform.localScale = Vector3.zero;
         _context.SetActive(true);
 
         _buttonStart.onClick.AddListener(StartCallback);
@@ -35,6 +36,10 @@ public class StartPanel : MonoBehaviour
         TweenAnimation();
         _animationSequence.Play();
     }
+
+    //TODO: Magic number!
+    private void Start() 
+        => _context.transform.DOScale(Vector3.one, 1f);
 
     private void OnDisable()
     {

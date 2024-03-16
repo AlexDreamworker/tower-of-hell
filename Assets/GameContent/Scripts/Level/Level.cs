@@ -4,6 +4,7 @@ using Zenject;
 
 public class Level : IInitializable, ITickable, IDisposable
 {
+    public event Action Started;
     public event Action Completed;
     public event Action Failed;
 
@@ -38,6 +39,8 @@ public class Level : IInitializable, ITickable, IDisposable
         _cursor.Visible(false);
 
         _character.StartWork();
+
+        Started?.Invoke();
     }
 
     public void Restart() { }
