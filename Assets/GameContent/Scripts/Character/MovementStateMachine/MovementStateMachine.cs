@@ -7,7 +7,7 @@ public class MovementStateMachine : IStateSwitcher
     private List<IState> _states;
     private IState _currentState;
 
-    private bool _isInit;
+    private bool _isWorked;
 
     public void Initialize(List<IState> states) 
     {
@@ -19,7 +19,7 @@ public class MovementStateMachine : IStateSwitcher
         _currentState = _states[0];
         _currentState.Enter();
 
-        _isInit = true;
+        _isWorked = true;
     }
 
     public void SwitchState<T>() where T : IState
@@ -39,7 +39,7 @@ public class MovementStateMachine : IStateSwitcher
 
     public void HandleInput()
     {
-        if (_isInit == false)
+        if (_isWorked == false)
             return;
 
         _currentState.HandleInput();
@@ -47,7 +47,7 @@ public class MovementStateMachine : IStateSwitcher
 
     public void Update()
     {
-        if (_isInit == false)
+        if (_isWorked == false)
             return;
 
         _currentState.Update();
@@ -55,7 +55,7 @@ public class MovementStateMachine : IStateSwitcher
 
     public void FixedUpdate()
     {
-        if (_isInit == false)
+        if (_isWorked == false)
             return;
 
         _currentState.FixedUpdate();

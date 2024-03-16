@@ -21,11 +21,13 @@ public class Level : IInitializable, ITickable, IDisposable
         _camera = camera;
     }
 
+//?--- NEED THIS? -------------------------------
     public void Initialize() { }
 
     public void Tick() { }
 
     public void Dispose() { }
+//?----------------------------------------------
 
     public void Start()
     { 
@@ -43,9 +45,32 @@ public class Level : IInitializable, ITickable, IDisposable
         Started?.Invoke();
     }
 
-    public void Restart() { }
+    public void Restart() 
+    { 
+        _character.SetPosition();
+        _cursor.Visible(false);
 
-    private void OnCompleted() => Completed?.Invoke();
+        _input.Enable();
+    }
 
-    private void OnFailed() => Failed?.Invoke();
+    //TODO: naming?
+    public void OnCompleted()
+    {
+        Debug.Log("((( ON COMPLETED )))");
+
+        Completed?.Invoke();
+
+        //Curtain close
+        //Load new level
+    }
+
+    //TODO: naming?
+    public void OnFailed()
+    {
+        _input.Disable();
+
+        _cursor.Visible(true);
+
+        Failed?.Invoke();
+    }
 }
