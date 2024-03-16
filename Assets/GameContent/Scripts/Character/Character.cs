@@ -40,14 +40,6 @@ public class Character : MonoBehaviour
         _stateMachine = stateMachine;
 
         _rigidbody = GetComponent<Rigidbody>();
-
-        _view.Initialize();
-
-        // //TODO: move to LEVEL
-        // _camera.Initialize(transform, _cameraPoint);
-
-        // //TODO: move to LEVEL
-        // _input.Enable();
     }
 
     public IInputService Input => _input;
@@ -62,6 +54,8 @@ public class Character : MonoBehaviour
     public CharacterStamina Stamina => _stamina;
     public Transform CameraPoint => _cameraPoint;
 
+    private void Start() => _view.Initialize();
+
     private void Update()
     {
         _stateMachine.HandleInput();
@@ -69,6 +63,12 @@ public class Character : MonoBehaviour
     }
 
     private void FixedUpdate() => _stateMachine.FixedUpdate();
+
+    public void StartWork() 
+    {
+        _view.StartWork();
+        _stateMachine.StartWork();
+    }
 
     public void LogStateInfo(Type type, string color)
         => _log.LogState(type.ToString(), color);

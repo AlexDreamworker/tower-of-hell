@@ -12,7 +12,10 @@ public class MovementStateMachine : IStateSwitcher
     public void Initialize(List<IState> states) 
     {
         _states = states;
+    }
 
+    public void StartWork() 
+    {
         _currentState = _states[0];
         _currentState.Enter();
 

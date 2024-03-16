@@ -36,6 +36,8 @@ public class Level : IInitializable, ITickable, IDisposable
 
         _input.Enable();
         _cursor.Visible(false);
+
+        _character.StartWork();
     }
 
     public void Restart() { }
