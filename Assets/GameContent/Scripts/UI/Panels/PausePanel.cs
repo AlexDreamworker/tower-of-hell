@@ -22,9 +22,7 @@ public class PausePanel : MonoBehaviour
 
     [Inject]
     private void Construct(IPauseService pauseService) 
-    {
-        _pauseService = pauseService;
-    }
+        => _pauseService = pauseService;
 
     private void OnEnable()
     {

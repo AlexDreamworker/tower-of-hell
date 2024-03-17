@@ -5,12 +5,9 @@ using Zenject;
 public class MobileInputService : IInputService, ITickable
 {
     public event Action PauseKeyPressed;
-
     public event Action JumpKeyStarted;
     public event Action JumpKeyPerformed;
-
     public event Action CrouchKeyPressed;
-
     public event Action DashKeyPressed;
 
     private const string VerticalAxisKey = "Vertical";

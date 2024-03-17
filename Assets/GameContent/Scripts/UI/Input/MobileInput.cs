@@ -9,9 +9,7 @@ public class MobileInput : MonoBehaviour
 
     [Inject]
     private void Construct(IPauseService pauseService) 
-    {
-        _pauseService = pauseService;
-    }
+        => _pauseService = pauseService;
 
     private void OnEnable()
         => _pauseService.PauseChanged += OnPauseChanged;

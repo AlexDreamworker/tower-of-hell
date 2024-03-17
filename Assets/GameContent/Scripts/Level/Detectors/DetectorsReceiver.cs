@@ -6,9 +6,7 @@ public class DetectorReceiver
     private Level _level;
 
     public DetectorReceiver(Level level) 
-    {
-        _level = level;
-    }
+        => _level = level;
 
     public void Triggered(DetectorType type)
     {

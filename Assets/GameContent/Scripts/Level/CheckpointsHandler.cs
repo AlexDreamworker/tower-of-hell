@@ -8,9 +8,7 @@ public class CheckpointsHandler
     private bool _isPointed;
 
     private CheckpointsHandler(Vector3 startPoint) 
-    {
-        _startPoint = startPoint;
-    }
+        => _startPoint = startPoint;
 
     public void SetPoint(Vector3 point) 
     {

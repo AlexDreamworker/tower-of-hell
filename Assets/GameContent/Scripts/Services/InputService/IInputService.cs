@@ -4,12 +4,9 @@ using UnityEngine;
 public interface IInputService
 {
     event Action PauseKeyPressed;
-
     event Action JumpKeyStarted;
     event Action JumpKeyPerformed;
-
     event Action CrouchKeyPressed;
-
     event Action DashKeyPressed;
 
     Vector2 Movement { get; }

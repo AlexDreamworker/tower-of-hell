@@ -14,9 +14,7 @@ public class DefeatPanel : MonoBehaviour
 
     [Inject]
     private void Construct(Level level) 
-    {
-        _level = level;
-    }
+        => _level = level;
 
     private void OnEnable()
     {

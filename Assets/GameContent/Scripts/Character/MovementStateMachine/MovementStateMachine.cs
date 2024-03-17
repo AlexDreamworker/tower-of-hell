@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-//TODO: Rename to CHARACTER_STATE_MACHINE???
 public class MovementStateMachine : IStateSwitcher
 {
     private List<IState> _states;
@@ -10,9 +9,7 @@ public class MovementStateMachine : IStateSwitcher
     private bool _isWorked;
 
     public void Initialize(List<IState> states) 
-    {
-        _states = states;
-    }
+        => _states = states;
 
     public void StartWork() 
     {
@@ -26,11 +23,8 @@ public class MovementStateMachine : IStateSwitcher
     {
         IState state = _states.FirstOrDefault(state => state is T);
 
-        //* do nothing if state NOT added
-        //*----------------------------------
         if (state == null)
             return;
-        //*----------------------------------
 
         _currentState?.Exit();
         _currentState = state;

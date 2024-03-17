@@ -22,9 +22,7 @@ public class StartPanel : MonoBehaviour
 
     [Inject]
     private void Construct(Level level) 
-    {
-        _level = level;
-    }
+        => _level = level;
 
     private void OnEnable()
     {
@@ -42,9 +40,7 @@ public class StartPanel : MonoBehaviour
         => _context.transform.DOScale(Vector3.one, 1f);
 
     private void OnDisable()
-    {
-        _buttonStart.onClick.RemoveListener(StartCallback);
-    }
+        => _buttonStart.onClick.RemoveListener(StartCallback);
 
     private void StartCallback()
     {

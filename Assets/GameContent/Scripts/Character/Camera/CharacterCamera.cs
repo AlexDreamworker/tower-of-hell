@@ -1,6 +1,5 @@
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(Camera))]
 public class CharacterCamera : MonoBehaviour, ICamera
@@ -15,23 +14,6 @@ public class CharacterCamera : MonoBehaviour, ICamera
     private float _yRotation;
 
     private bool _isInit;
-
-    // [Inject]
-    // private void Construct(IInputService input, CharacterConfig config) 
-    // {
-    //     _input = input;
-    //     _config = config.CameraConfig;
-
-    //     _camera = GetComponent<Camera>();
-    // }
-
-    // public void Initialize(Transform character, Transform point)
-    // {
-    //     _character = character;
-    //     _targetPoint = point;
-
-    //     _isInit = true;
-    // }
 
     public void Initialize(IInputService input, CharacterConfig config, Transform character, Transform point)
     {

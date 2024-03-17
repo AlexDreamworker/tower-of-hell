@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//TODO: Change naming?
 public class SphereObstacleDetector : MonoBehaviour, IObstacleDetector
 {
     [SerializeField] private LayerMask _layer;

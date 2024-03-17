@@ -5,28 +5,27 @@ public class Detector : MonoBehaviour
 {
     [SerializeField] private DetectorType _type;
 
-    private DetectorReceiver _provider;
+    private DetectorReceiver _receiver;
 
     [Inject]
-    private void Construct(DetectorReceiver provider) 
-    {
-        _provider = provider;
-    }
+    private void Construct(DetectorReceiver receiver) 
+        => _receiver = receiver;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Character character))
-        {
-            if (_type == DetectorType.Checkpoint) 
-                TriggeredCheckpoint();
-            else
-                _provider.Triggered(_type);
-        }
+            NotifyDetectorReceiver();
     }
 
-    private void TriggeredCheckpoint() 
+    private void NotifyDetectorReceiver() 
     {
-        _provider.TriggeredCheckpoint(transform.position);
+        if (_type != DetectorType.Checkpoint)
+        {
+            _receiver.Triggered(_type);
+            return;
+        }
+
+        _receiver.TriggeredCheckpoint(transform.position);
         gameObject.SetActive(false);
     }
 }

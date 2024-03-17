@@ -1,10 +1,7 @@
 using UnityEngine;
-using Zenject;
 
-public class CursorService : ICursorService, IInitializable
+public class CursorService : ICursorService
 {
-    public void Initialize() { } //?=> Visible(false);
-    
     //TODO: mobile input test
     public void Visible(bool status)
     {
