@@ -15,7 +15,18 @@ public class Detector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Character character)) 
-            _provider.Triggered(_type);
+        if (other.TryGetComponent(out Character character))
+        {
+            if (_type == DetectorType.Checkpoint) 
+                TriggeredCheckpoint();
+            else
+                _provider.Triggered(_type);
+        }
+    }
+
+    private void TriggeredCheckpoint() 
+    {
+        _provider.TriggeredCheckpoint(transform.position);
+        gameObject.SetActive(false);
     }
 }

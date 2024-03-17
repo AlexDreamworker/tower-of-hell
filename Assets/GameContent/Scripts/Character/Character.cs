@@ -54,16 +54,7 @@ public class Character : MonoBehaviour
     public CharacterStamina Stamina => _stamina;
     public Transform CameraPoint => _cameraPoint;
 
-    //TODO: move this
-    private Vector3 _startPoint;
-
-    private void Start()
-    {
-        //TODO: move this
-        _startPoint = transform.position;
-        
-        _view.Initialize();
-    }
+    private void Start() => _view.Initialize();
 
     private void Update()
     {
@@ -79,10 +70,8 @@ public class Character : MonoBehaviour
         _stateMachine.StartWork();
     }
 
-    public void SetPosition() 
-    {
-        transform.position = _startPoint;
-    }
+    public void SetPosition(Vector3 position) 
+        => transform.position = position;
 
     public void LogStateInfo(Type type, string color)
         => _log.LogState(type.ToString(), color);

@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using Zenject;
 
-public class Level : IInitializable, ITickable, IDisposable
+public class Level
 {
     public event Action Started;
     public event Action Completed;
@@ -12,22 +11,21 @@ public class Level : IInitializable, ITickable, IDisposable
     private ICursorService _cursor;
     private Character _character;
     private CharacterCamera _camera;
+    private CheckpointsHandler _checkpointsHandler;
 
-    private Level(IInputService input, ICursorService cursor, Character character, CharacterCamera camera)
+    private Level(
+        IInputService input, 
+        ICursorService cursor, 
+        Character character, 
+        CharacterCamera camera,
+        CheckpointsHandler checkpointsHandler)
     { 
         _input = input;
         _cursor = cursor;
         _character = character;
         _camera = camera;
+        _checkpointsHandler = checkpointsHandler;
     }
-
-//?--- NEED THIS? -------------------------------
-    public void Initialize() { }
-
-    public void Tick() { }
-
-    public void Dispose() { }
-//?----------------------------------------------
 
     public void Start()
     { 
@@ -47,11 +45,15 @@ public class Level : IInitializable, ITickable, IDisposable
 
     public void Restart() 
     { 
-        _character.SetPosition();
+        _character.SetPosition(_checkpointsHandler.GetPoint());
         _cursor.Visible(false);
 
         _input.Enable();
     }
+
+    //TODO: naming?
+    public void OnCheckpointed(Vector3 point) 
+        => _checkpointsHandler.SetPoint(point);
 
     //TODO: naming?
     public void OnCompleted()

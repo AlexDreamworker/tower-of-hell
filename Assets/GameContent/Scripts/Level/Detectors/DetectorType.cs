@@ -1,5 +1,6 @@
 public enum DetectorType
 {
     Death,
-    Win
+    Win,
+    Checkpoint
 }

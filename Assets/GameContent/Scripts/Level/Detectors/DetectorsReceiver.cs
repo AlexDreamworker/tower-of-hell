@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class DetectorReceiver
 {
@@ -24,4 +25,7 @@ public class DetectorReceiver
                 throw new ArgumentOutOfRangeException($"Unknown trigger type: {type}");
         }
     }
+
+    public void TriggeredCheckpoint(Vector3 position)
+        => _level.OnCheckpointed(position);
 }
