@@ -5,9 +5,7 @@ using Zenject;
 public class DefeatPanel : MonoBehaviour
 {
     [Space]
-    [SerializeField] private GameObject _context;
-
-    [Space]
+    [SerializeField] private Context _context;
     [SerializeField] private Button _buttonContinue;
 
     private Level _level;
@@ -18,7 +16,7 @@ public class DefeatPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        _context.SetActive(false);
+        _context.Hide();
 
         _level.Failed += OnLevelFailed;
         _buttonContinue.onClick.AddListener(ContinueCallback);
@@ -32,7 +30,7 @@ public class DefeatPanel : MonoBehaviour
 
     private void OnLevelFailed() 
     {
-        _context.SetActive(true);
+        _context.Show();
 
         //TODO: Change this!
         Time.timeScale = 0f;
@@ -45,6 +43,6 @@ public class DefeatPanel : MonoBehaviour
 
         _level.Restart();
 
-        _context.SetActive(false);
+        _context.Hide();
     }
 }

@@ -3,7 +3,7 @@ using Zenject;
 
 public class HUD : MonoBehaviour
 {
-    [SerializeField] private StaminaView _staminaView;
+    [SerializeField] private Context _context;
 
     private Level _level;
 
@@ -17,7 +17,7 @@ public class HUD : MonoBehaviour
     {
         _level.Started += OnLevelStarted;
 
-        _staminaView.gameObject.SetActive(false);
+        _context.Hide();
     }
 
     private void OnDisable()
@@ -26,5 +26,5 @@ public class HUD : MonoBehaviour
     }
 
     private void OnLevelStarted() 
-        => _staminaView.gameObject.SetActive(true);
+        => _context.Show();
 }

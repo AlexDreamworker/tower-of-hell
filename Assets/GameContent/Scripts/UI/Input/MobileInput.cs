@@ -3,8 +3,9 @@ using Zenject;
 
 public class MobileInput : MonoBehaviour
 {
-    [SerializeField] private GameObject _context;
+    [SerializeField] private Context _context;
 
+    //TODO: Change this!
     private IPauseService _pauseService;
 
     [Inject]

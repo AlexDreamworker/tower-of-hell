@@ -6,19 +6,10 @@ using Zenject;
 public class StartPanel : MonoBehaviour
 {
     [Space]
-    [SerializeField] private GameObject _context;
-
-    [Space]
+    [SerializeField] private Context _context;
     [SerializeField] private Button _buttonStart;
 
-    //TODO: Duplicate code!
-    [SerializeField, Range(0, 3f)] private float _normalScale = 1f;
-    [SerializeField, Range(0, 3f)] private float _animationScale = 1.1f;
-    [SerializeField, Range(0, 5f)] private float _animationDuration = 0.5f;
-
     private Level _level;
-
-    private Tween _animationSequence;
 
     [Inject]
     private void Construct(Level level) 
@@ -27,12 +18,9 @@ public class StartPanel : MonoBehaviour
     private void OnEnable()
     {
         _context.transform.localScale = Vector3.zero;
-        _context.SetActive(true);
+        _context.Show();
 
         _buttonStart.onClick.AddListener(StartCallback);
-
-        TweenAnimation();
-        _animationSequence.Play();
     }
 
     //TODO: Magic number!
@@ -45,19 +33,6 @@ public class StartPanel : MonoBehaviour
     private void StartCallback()
     {
         _level.Start();
-        _animationSequence.Pause();
-        _context.SetActive(false);
-    }
-
-    //TODO: Move to button?
-    private void TweenAnimation() 
-    {
-        _animationSequence = DOTween.Sequence()
-            .Append(_buttonStart.gameObject.transform.DOScale(_animationScale, _animationDuration))
-            .SetEase(Ease.InSine)
-            .Append(_buttonStart.gameObject.transform.DOScale(_normalScale, _animationDuration))
-            .SetEase(Ease.OutSine)
-            .SetUpdate(UpdateType.Normal, true)
-            .SetLoops(-1, LoopType.Yoyo);
+        _context.Hide();
     }
 }
