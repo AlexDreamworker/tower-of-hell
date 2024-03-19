@@ -1796,6 +1796,7 @@ GameObject:
   - component: {fileID: 774021658}
   - component: {fileID: 774021660}
   - component: {fileID: 774021659}
+  - component: {fileID: 774021661}
   m_Layer: 5
   m_Name: BlackoutTop
   m_TagString: Untagged
@@ -1836,7 +1837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1860,6 +1861,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774021657}
   m_CullTransparentMesh: 1
+--- !u!114 &774021661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774021657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fd3c218493ec74eb255a8f885f9a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isStart: 0
+  _scaleTo: {x: 1, y: 0, z: 1}
+  _duration: 0.8
+  _ease: 4
+  _loops: 1
+  _loopType: 0
 --- !u!1 &782676361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1952,6 +1971,7 @@ GameObject:
   - component: {fileID: 806156574}
   - component: {fileID: 806156576}
   - component: {fileID: 806156575}
+  - component: {fileID: 806156577}
   m_Layer: 5
   m_Name: BlackoutBottom
   m_TagString: Untagged
@@ -1992,7 +2012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2016,6 +2036,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806156573}
   m_CullTransparentMesh: 1
+--- !u!114 &806156577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806156573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76fd3c218493ec74eb255a8f885f9a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isStart: 0
+  _scaleTo: {x: 1, y: 0, z: 1}
+  _duration: 0.8
+  _ease: 4
+  _loops: 1
+  _loopType: 0
 --- !u!1 &825304512
 GameObject:
   m_ObjectHideFlags: 0
@@ -3894,9 +3932,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43270961a35c5fc4bb43138747e0635d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blackouts:
-  - {fileID: 774021658}
-  - {fileID: 806156574}
+  _tweeners:
+  - {fileID: 774021661}
+  - {fileID: 806156577}
 --- !u!1 &1594010920
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-//TODO: Magic numbers
 public class Mover : MonoBehaviour
 {
     [Space]
@@ -12,9 +12,14 @@ public class Mover : MonoBehaviour
     [SerializeField] private bool _isDebug;
 
     [Space]
-    [SerializeField] private Transform[] _points;
+    [SerializeField] private List<Transform> _points = new List<Transform>();
+
+    private const int MinPointsToDraw = 2;
+    private const float DrawSphereRadius = 0.4f;
 
     private int _currentPointId;
+
+    private int PointsCount => _points.Count - 1;
 
     private void Start() => Move();
 
@@ -24,7 +29,7 @@ public class Mover : MonoBehaviour
             .SetEase(_ease)
             .OnComplete(() => 
             {
-                if (_currentPointId < _points.Length - 1)
+                if (_currentPointId < PointsCount)
                     _currentPointId += 1;
                 else 
                     _currentPointId = 0;
@@ -38,17 +43,17 @@ public class Mover : MonoBehaviour
         if (_isDebug == false)
             return;
 
-        if (_points == null || _points.Length < 2)
+        if (_points == null || _points.Count < MinPointsToDraw)
             return;
 
         Gizmos.color = Color.yellow;
 
         foreach (Transform point in _points)
-            Gizmos.DrawWireSphere(point.position, 0.4f);
+            Gizmos.DrawWireSphere(point.position, DrawSphereRadius);
 
-        for (int i = 0; i < _points.Length - 1; i++)
+        for (int i = 0; i < PointsCount; i++)
             Gizmos.DrawLine(_points[i].position, _points[i + 1].position);
 
-        Gizmos.DrawLine(_points[_points.Length - 1].position, _points[0].position);
+        Gizmos.DrawLine(_points[PointsCount].position, _points[0].position);
     }
 }

@@ -1,8 +1,11 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
 public class ScaleTweener : MonoBehaviour
 {
+    public event Action Complete;
+
     [Space]
     [SerializeField] private bool _isStart;
     [SerializeField] private Vector3 _scaleTo;
@@ -25,14 +28,60 @@ public class ScaleTweener : MonoBehaviour
 
     private void OnDisable() => _tween?.Kill();
 
-    public void Play()
+    public void Play(bool isHideAfterComplete = false)
     {
         _tween?.Kill();
 
         transform.localScale = _originalScale;
 
-        _tween = transform.DOScale(_scaleTo, _duration)
-            .SetEase(_ease)
-            .SetLoops(_loops, _loopType);
+        DoScale(_scaleTo, _duration, _ease, _loops, _loopType, isHideAfterComplete);
+    }
+
+    public void Play(
+        Vector3 scaleTo, 
+        float duration = 1f, 
+        Ease ease = Ease.InOutSine, 
+        int loops = -1, 
+        LoopType loopType = LoopType.Yoyo,
+        bool isHideAfterComplete = false) 
+    {
+        _tween?.Kill();
+
+        transform.localScale = _originalScale;
+
+        DoScale(scaleTo, duration, ease, loops, loopType, isHideAfterComplete);
+    }
+
+    public void Play(
+        Vector3 originalScale, 
+        Vector3 scaleTo, 
+        float duration = 1f, 
+        Ease ease = Ease.InOutSine, 
+        int loops = -1, 
+        LoopType loopType = LoopType.Yoyo,
+        bool isHideAfterComplete = false) 
+    {
+        _tween?.Kill();
+
+        transform.localScale = originalScale;
+
+        DoScale(scaleTo, duration, ease, loops, loopType, isHideAfterComplete);
+    }
+
+    public void Show() => gameObject.SetActive(true);
+    public void Hide() => gameObject.SetActive(false);
+
+    private void DoScale(Vector3 scaleTo, float duration, Ease ease, int loops, LoopType loopType, bool isHideOnComplete) 
+    {
+        _tween = transform.DOScale(scaleTo, duration)
+            .SetEase(ease)
+            .SetLoops(loops, loopType)
+            .OnComplete(() => 
+            {
+                if (isHideOnComplete)
+                    Hide();
+
+                Complete?.Invoke();
+            });
     }
 }

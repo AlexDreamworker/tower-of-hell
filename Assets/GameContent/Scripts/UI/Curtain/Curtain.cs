@@ -1,29 +1,28 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class Curtain : MonoBehaviour
 {
-    [SerializeField] private List<Transform> _blackouts = new List<Transform>();
+    [SerializeField] private List<ScaleTweener> _tweeners = new List<ScaleTweener>();
 
     private void Start() => Hide();
 
-    //TODO: Magic number!
-    public void Show() 
+    [ContextMenu("SHOW")]
+    private void Show() 
     {
-        foreach (Transform blackout in _blackouts)
-            blackout.DOScaleY(1f, 0.5f);
+        foreach (var tweener in _tweeners)
+        {
+            tweener.Show();
+            tweener.Play(new Vector3(1f, 0f, 1f), Vector3.one, 2f, default, default, default);
+        }
     }
 
-    //TODO: Magic number!
-    public void Hide() 
+    private void Hide() 
     {
-        foreach (Transform blackout in _blackouts)
+        foreach (var tweener in _tweeners)
         {
-            if (blackout.gameObject.activeInHierarchy == false)
-                blackout.gameObject.SetActive(true);
-
-            blackout.DOScaleY(0f, 0.5f);
+            tweener.Show();
+            tweener.Play(true);
         }
     }
 }
