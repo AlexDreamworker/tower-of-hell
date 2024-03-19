@@ -12,19 +12,22 @@ public class Level
     private Character _character;
     private CharacterCamera _camera;
     private CheckpointsHandler _checkpointsHandler;
+    private Curtain _curtain; //TODO: move this?
 
     private Level(
         IInputService input, 
         ICursorService cursor, 
         Character character, 
         CharacterCamera camera,
-        CheckpointsHandler checkpointsHandler)
+        CheckpointsHandler checkpointsHandler,
+        Curtain curtain)
     { 
         _input = input;
         _cursor = cursor;
         _character = character;
         _camera = camera;
         _checkpointsHandler = checkpointsHandler;
+        _curtain = curtain;
     }
 
     public void Start()
@@ -58,7 +61,9 @@ public class Level
     //TODO: naming?
     public void OnCompleted()
     {
-        Debug.Log("((( ON COMPLETED )))");
+        //Debug.Log("((( ON COMPLETED )))");
+
+        _curtain.Show();
 
         Completed?.Invoke();
 

@@ -7,17 +7,16 @@ public class Curtain : MonoBehaviour
 
     private void Start() => Hide();
 
-    [ContextMenu("SHOW")]
-    private void Show() 
+    public void Show() 
     {
         foreach (var tweener in _tweeners)
         {
             tweener.Show();
-            tweener.Play(new Vector3(1f, 0f, 1f), Vector3.one, 2f, default, default, default);
+            tweener.Play(new Vector3(1f, 0f, 1f), Vector3.one, 1f, default, default, default);
         }
     }
 
-    private void Hide() 
+    public void Hide() 
     {
         foreach (var tweener in _tweeners)
         {
