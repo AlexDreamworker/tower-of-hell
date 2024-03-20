@@ -1,23 +1,44 @@
-using UnityEngine;
 using Zenject;
 
-public class MobileInput : MonoBehaviour
+public class MobileInput : BasePanel
 {
-    [SerializeField] private Context _context;
-
-    //TODO: Change this!
-    private IPauseService _pauseService;
+    private Level _level;
 
     [Inject]
-    private void Construct(IPauseService pauseService) 
-        => _pauseService = pauseService;
+    private void Construct(Level level) 
+        => _level = level;
 
     private void OnEnable()
-        => _pauseService.PauseChanged += OnPauseChanged;
+    {
+        _level.Started += OnLevelStarted;
+        _level.Restarted += OnLevelRestarted;
+        _level.Paused += OnLevelPaused;
+        _level.Continued += OnLevelContinued;
+        _level.Completed += OnLevelCompleted;
+        _level.Failed += OnLevelFailed;
+
+        Hide();
+    }
 
     private void OnDisable()
-        => _pauseService.PauseChanged -= OnPauseChanged;
+    {
+        _level.Started -= OnLevelStarted;
+        _level.Restarted -= OnLevelRestarted;
+        _level.Paused -= OnLevelPaused;
+        _level.Continued -= OnLevelContinued;
+        _level.Completed -= OnLevelCompleted;
+        _level.Failed -= OnLevelFailed;
+    }
 
-    private void OnPauseChanged(bool isPause) 
-        => _context.SetActive(!isPause);
+    private void OnLevelStarted() => Show();
+
+    private void OnLevelRestarted() => Show();
+
+    private void OnLevelPaused() => Hide();
+
+    private void OnLevelContinued() => Show();
+
+    private void OnLevelCompleted() => Hide();
+
+    private void OnLevelFailed() => Hide();
 }

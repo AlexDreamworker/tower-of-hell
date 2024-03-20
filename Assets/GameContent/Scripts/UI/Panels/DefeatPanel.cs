@@ -2,47 +2,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class DefeatPanel : MonoBehaviour
+public class DefeatPanel : BasePanel
 {
-    [Space]
-    [SerializeField] private Context _context;
     [SerializeField] private Button _buttonContinue;
 
-    private Level _level;
+    private UIMediator _mediator;
 
     [Inject]
-    private void Construct(Level level) 
-        => _level = level;
+    private void Construct(UIMediator mediator) 
+        => _mediator = mediator;
 
-    private void OnEnable()
-    {
-        _context.Hide();
+    private void Start() => Hide();
 
-        _level.Failed += OnLevelFailed;
-        _buttonContinue.onClick.AddListener(ContinueCallback);
-    }
+    private void OnEnable() => _buttonContinue.onClick.AddListener(RestartPressed);
 
-    private void OnDisable()
-    {
-        _level.Failed -= OnLevelFailed;
-        _buttonContinue.onClick.RemoveListener(ContinueCallback);
-    }
+    private void OnDisable() => _buttonContinue.onClick.RemoveListener(RestartPressed);
 
-    private void OnLevelFailed() 
-    {
-        _context.Show();
-
-        //TODO: Change this!
-        Time.timeScale = 0f;
-    }
-
-    private void ContinueCallback()
-    {
-        //TODO: Change this!
-        Time.timeScale = 1f;
-
-        _level.Restart();
-
-        _context.Hide();
-    }
+    private void RestartPressed() => _mediator.RestartLevel();
 }

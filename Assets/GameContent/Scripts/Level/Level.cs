@@ -1,36 +1,57 @@
 using System;
 using UnityEngine;
 
-public class Level
+public class Level : IDisposable
 {
     public event Action Started;
+    public event Action Restarted;
+    public event Action Paused;
+    public event Action Continued;
+    public event Action Checkpointed;
     public event Action Completed;
     public event Action Failed;
 
     private IInputService _input;
+    private IPauseService _pause;
     private ICursorService _cursor;
     private Character _character;
     private CharacterCamera _camera;
     private CheckpointsHandler _checkpointsHandler;
-    private Curtain _curtain; //TODO: move this?
+
+    private bool _isPaused = false;
 
     private Level(
-        IInputService input, 
+        IInputService input,
+        IPauseService pause,
         ICursorService cursor, 
         Character character, 
         CharacterCamera camera,
-        CheckpointsHandler checkpointsHandler,
-        Curtain curtain)
+        CheckpointsHandler checkpointsHandler)
     { 
         _input = input;
+        _pause = pause;
         _cursor = cursor;
         _character = character;
         _camera = camera;
         _checkpointsHandler = checkpointsHandler;
-        _curtain = curtain;
+
+        _input.PauseKeyPressed += OnPausePressed;
     }
 
-    public void Start()
+    public void Dispose()
+        => _input.PauseKeyPressed -= OnPausePressed;
+
+    private void OnPausePressed()
+    {
+        _isPaused = !_isPaused;
+
+        if (_isPaused)
+            OnPaused();
+        else
+            OnContinued();    
+    }
+
+    public void OnStarted()
     { 
         _camera.Initialize(
             _input, 
@@ -40,44 +61,65 @@ public class Level
 
         _input.Enable();
         _cursor.Visible(false);
-
         _character.StartWork();
 
         Started?.Invoke();
     }
 
-    public void Restart() 
-    { 
+    public void OnRestarted() 
+    {
+        _pause.Disable();
+
         _character.SetPosition(_checkpointsHandler.GetPoint());
         _cursor.Visible(false);
 
         _input.Enable();
+
+        Restarted?.Invoke();
     }
 
-    //TODO: naming?
-    public void OnCheckpointed(Vector3 point) 
-        => _checkpointsHandler.SetPoint(point);
+    public void OnPaused()
+    {
+        _pause.Enable();
+        _cursor.Visible(true);
 
-    //TODO: naming?
+        Paused?.Invoke();
+    }
+
+    public void OnContinued() 
+    {
+        _isPaused = false;
+
+        _cursor.Visible(false);
+
+        Continued?.Invoke();
+
+        _pause.Disable();
+    }
+
+    public void OnCheckpointed(Vector3 point)
+    {
+        _checkpointsHandler.SetPoint(point);
+
+        Checkpointed?.Invoke();
+    } 
+
     public void OnCompleted()
     {
-        //Debug.Log("((( ON COMPLETED )))");
-
-        _curtain.Show();
+        _input.Disable();
+        _character.StopWork();
 
         Completed?.Invoke();
-
-        //Curtain close
-        //Load new level
     }
 
-    //TODO: naming?
     public void OnFailed()
     {
         _input.Disable();
-
+        _pause.Enable();
         _cursor.Visible(true);
 
         Failed?.Invoke();
     }
+
+    public void LoadNextLevel() { }
 }

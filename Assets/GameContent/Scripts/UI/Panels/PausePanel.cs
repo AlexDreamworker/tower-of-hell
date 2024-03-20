@@ -2,33 +2,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class PausePanel : MonoBehaviour
+public class PausePanel : BasePanel
 {
-    [Space]
-    [SerializeField] private Context _context;
     [SerializeField] private Button _buttonContinue;
 
-    private IPauseService _pauseService;
+    private UIMediator _mediator;
 
     [Inject]
-    private void Construct(IPauseService pauseService) 
-        => _pauseService = pauseService;
+    private void Construct(UIMediator mediator) 
+        => _mediator = mediator;
 
-    private void OnEnable()
-    {
-        _pauseService.PauseChanged += OnPauseChanged;
-        _buttonContinue.onClick.AddListener(ContinueCallback);
-    }
+    private void OnEnable() => _buttonContinue.onClick.AddListener(ContinuePressed);
 
-    private void OnDisable()
-    {
-        _pauseService.PauseChanged -= OnPauseChanged;
-        _buttonContinue.onClick.RemoveListener(ContinueCallback);
-    }
+    private void OnDisable() => _buttonContinue.onClick.RemoveListener(ContinuePressed);
 
-    private void OnPauseChanged(bool isPause)
-        => _context.SetActive(isPause);
-
-    private void ContinueCallback() 
-        => _pauseService.SetPause(false);
+    private void ContinuePressed() => _mediator.ContinuedLevel();
 }

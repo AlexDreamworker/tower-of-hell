@@ -3,36 +3,29 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class StartPanel : MonoBehaviour
+public class StartPanel : BasePanel
 {
-    [Space]
-    [SerializeField] private Context _context;
     [SerializeField] private Button _buttonStart;
 
-    private Level _level;
+    private const float AnimationDuration = 1f;
+
+    private UIMediator _mediator;
 
     [Inject]
-    private void Construct(Level level) 
-        => _level = level;
+    private void Construct(UIMediator mediator) 
+        => _mediator = mediator;
 
     private void OnEnable()
     {
-        _context.transform.localScale = Vector3.zero;
-        _context.Show();
+        Context.transform.localScale = Vector3.zero;
+        Show();
 
-        _buttonStart.onClick.AddListener(StartCallback);
+        _buttonStart.onClick.AddListener(StartPressed);
     }
 
-    //TODO: Magic number!
-    private void Start() 
-        => _context.transform.DOScale(Vector3.one, 1f);
+    private void Start() => Context.transform.DOScale(Vector3.one, AnimationDuration);
 
-    private void OnDisable()
-        => _buttonStart.onClick.RemoveListener(StartCallback);
+    private void OnDisable() => _buttonStart.onClick.RemoveListener(StartPressed);
 
-    private void StartCallback()
-    {
-        _level.Start();
-        _context.Hide();
-    }
+    private void StartPressed() => _mediator.StartLevel();
 }

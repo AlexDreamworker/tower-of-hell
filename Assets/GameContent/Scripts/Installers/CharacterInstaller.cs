@@ -3,6 +3,7 @@ using Zenject;
 
 public class CharacterInstaller : MonoInstaller
 {
+    [Space]
     [SerializeField] private CharacterConfig _config;
     [SerializeField] private CharacterCamera _camera;
     [SerializeField] private Character _prefab;

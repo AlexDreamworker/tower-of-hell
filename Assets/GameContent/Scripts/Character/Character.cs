@@ -23,6 +23,8 @@ public class Character : MonoBehaviour
 
     private Rigidbody _rigidbody;
 
+    private bool _isWorking = false;
+
     [Inject]
     private void Construct(
         IInputService input, 
@@ -56,19 +58,37 @@ public class Character : MonoBehaviour
 
     private void Start() => _view.Initialize();
 
-    private void Update()
+    private void Update() 
     {
+        if (_isWorking == false)
+            return;
+
         _stateMachine.HandleInput();
         _stateMachine.Update();
     }
 
-    private void FixedUpdate() => _stateMachine.FixedUpdate();
+    private void FixedUpdate()
+    {
+        if (_isWorking == false)
+            return;
+
+        _stateMachine.FixedUpdate();
+    }
 
     public void StartWork() 
     {
         _view.StartWork();
         _stateMachine.StartWork();
+
+        _isWorking = true;
     }
+
+    public void StopWork()
+    {
+        _isWorking = false;
+
+        _rigidbody.velocity = Vector3.zero;
+    } 
 
     public void SetPosition(Vector3 position) 
         => transform.position = position;
