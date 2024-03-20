@@ -20,12 +20,13 @@ public class StartPanel : BasePanel
         Context.transform.localScale = Vector3.zero;
         Show();
 
-        _buttonStart.onClick.AddListener(StartPressed);
+        _buttonStart.AddListener(StartPressed);
     }
 
+    //TODO: Move animation in Tweener?
     private void Start() => Context.transform.DOScale(Vector3.one, AnimationDuration);
 
-    private void OnDisable() => _buttonStart.onClick.RemoveListener(StartPressed);
+    private void OnDisable() => _buttonStart.RemoveListener(StartPressed);
 
     private void StartPressed() => _mediator.StartLevel();
 }

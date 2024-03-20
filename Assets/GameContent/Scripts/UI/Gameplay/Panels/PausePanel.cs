@@ -12,9 +12,9 @@ public class PausePanel : BasePanel
     private void Construct(UIMediator mediator) 
         => _mediator = mediator;
 
-    private void OnEnable() => _buttonContinue.onClick.AddListener(ContinuePressed);
+    private void OnEnable() => _buttonContinue.AddListener(ContinuePressed);
 
-    private void OnDisable() => _buttonContinue.onClick.RemoveListener(ContinuePressed);
+    private void OnDisable() => _buttonContinue.RemoveListener(ContinuePressed);
 
     private void ContinuePressed() => _mediator.ContinueLevel();
 }

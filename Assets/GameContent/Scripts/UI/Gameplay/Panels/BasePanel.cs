@@ -6,7 +6,7 @@ public class BasePanel : MonoBehaviour
 
     protected GameObject Context => _context;
 
-    public void Show() => _context.SetActive(true);
+    public void Show() => _context.transform.Activate();
     
-    public void Hide() => _context.SetActive(false);
+    public void Hide() => _context.transform.Deactivate();
 }

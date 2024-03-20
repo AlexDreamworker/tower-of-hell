@@ -68,8 +68,8 @@ public class ScaleTweener : MonoBehaviour
         DoScale(scaleTo, duration, ease, loops, loopType, isHideAfterComplete);
     }
 
-    public void Show() => gameObject.SetActive(true);
-    public void Hide() => gameObject.SetActive(false);
+    public void Show() => transform.Activate();
+    public void Hide() => transform.Deactivate();
 
     private void DoScale(Vector3 scaleTo, float duration, Ease ease, int loops, LoopType loopType, bool isHideOnComplete) 
     {

@@ -16,6 +16,7 @@ public abstract class CrouchedState : GroundedState
         base.Enter();
 
         Data.YScale = _config.YScale;
+
         Transform.localScale = new Vector3(Transform.localScale.x, Data.YScale, Transform.localScale.z);
     }
 

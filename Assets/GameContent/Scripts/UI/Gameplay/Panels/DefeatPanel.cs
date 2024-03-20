@@ -14,9 +14,9 @@ public class DefeatPanel : BasePanel
 
     private void Start() => Hide();
 
-    private void OnEnable() => _buttonContinue.onClick.AddListener(RestartPressed);
+    private void OnEnable() => _buttonContinue.AddListener(RestartPressed);
 
-    private void OnDisable() => _buttonContinue.onClick.RemoveListener(RestartPressed);
+    private void OnDisable() => _buttonContinue.RemoveListener(RestartPressed);
 
     private void RestartPressed() => _mediator.RestartLevel();
 }

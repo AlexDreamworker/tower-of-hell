@@ -26,6 +26,7 @@ public class Detector : MonoBehaviour
         }
 
         _receiver.TriggeredCheckpoint(transform.position);
-        gameObject.SetActive(false);
+        
+        transform.Deactivate();
     }
 }
