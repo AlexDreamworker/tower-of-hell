@@ -41,16 +41,6 @@ public class Level : IDisposable
     public void Dispose()
         => _input.PauseKeyPressed -= OnPausePressed;
 
-    private void OnPausePressed()
-    {
-        _isPaused = !_isPaused;
-
-        if (_isPaused)
-            OnPaused();
-        else
-            OnContinued();    
-    }
-
     public void OnStarted()
     { 
         _camera.Initialize(
@@ -122,4 +112,14 @@ public class Level : IDisposable
     }
 
     public void LoadNextLevel() { }
+
+    private void OnPausePressed()
+    {
+        _isPaused = !_isPaused;
+
+        if (_isPaused)
+            OnPaused();
+        else
+            OnContinued();    
+    }
 }

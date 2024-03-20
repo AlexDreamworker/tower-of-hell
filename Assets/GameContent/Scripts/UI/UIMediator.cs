@@ -48,7 +48,7 @@ public class UIMediator : IDisposable
 
     public void RestartLevel() => _level.OnRestarted();
 
-    public void ContinuedLevel() => _level.OnContinued();
+    public void ContinueLevel() => _level.OnContinued();
 
     private void OnLevelStarted()
     {

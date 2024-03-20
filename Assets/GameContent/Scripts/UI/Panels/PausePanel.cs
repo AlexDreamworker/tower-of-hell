@@ -16,5 +16,5 @@ public class PausePanel : BasePanel
 
     private void OnDisable() => _buttonContinue.onClick.RemoveListener(ContinuePressed);
 
-    private void ContinuePressed() => _mediator.ContinuedLevel();
+    private void ContinuePressed() => _mediator.ContinueLevel();
 }
