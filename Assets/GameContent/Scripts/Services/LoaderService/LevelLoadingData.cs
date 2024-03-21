@@ -1,9 +1,21 @@
+using System;
+
 public class LevelLoadingData
 {
-    // private GameModeType _gameModeType;
+	private int _level;
+	
+	public LevelLoadingData(int level)
+		=> Level = level;
 
-    // public LevelLoadingData(GameModeType gameModeType) 
-    //     => _gameModeType = gameModeType;
+	public int Level
+	{
+		get => _level;
+		set 
+		{
+			if (value < 0)
+				throw new ArgumentOutOfRangeException(nameof(value));
 
-    // public GameModeType GameModeType => _gameModeType;
+			_level = value;
+		}
+	}
 }

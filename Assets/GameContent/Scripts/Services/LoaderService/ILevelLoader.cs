@@ -1,4 +1,4 @@
 public interface ILevelLoader
 {
-    void Load(LevelLoadingData levelLoadingData);
+    void Load(SceneID sceneID, LevelLoadingData levelLoadingData);
 }
