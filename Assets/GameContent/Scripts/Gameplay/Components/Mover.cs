@@ -4,56 +4,60 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    [Space]
-    [SerializeField, Range(0, 50f)] private float _duration = 5f;
-    [SerializeField] private Ease _ease = Ease.InOutSine;
+	[Space]
+	[SerializeField, Range(0, 50f)] private float _duration = 5f;
+	[SerializeField] private Ease _ease = Ease.InOutSine;
 
-    [Space]
-    [SerializeField] private bool _isDebug;
+	[Space]
+	[SerializeField] private bool _isDebug;
 
-    [Space]
-    [SerializeField] private List<Transform> _points = new List<Transform>();
+	[Space]
+	[SerializeField] private List<Transform> _points = new List<Transform>();
 
-    private const int MinPointsToDraw = 2;
-    private const float DrawSphereRadius = 0.4f;
+	private const int MinPointsToDraw = 2;
+	private const float DrawSphereRadius = 0.4f;
 
-    private int _currentPointId;
+	private int _currentPointId;
+	
+	private Tween _tween;
 
-    private int PointsCount => _points.Count - 1;
+	private int PointsCount => _points.Count - 1;
 
-    private void Start() => Move();
+	private void Start() => Move();
 
-    private void Move() 
-    {
-        transform.DOMove(_points[_currentPointId].position, _duration)
-            .SetEase(_ease)
-            .OnComplete(() => 
-            {
-                if (_currentPointId < PointsCount)
-                    _currentPointId += 1;
-                else 
-                    _currentPointId = 0;
+	private void OnDisable() => _tween?.Kill();
 
-                Move();
-            });
-    }
+	private void Move() 
+	{
+		_tween = transform.DOMove(_points[_currentPointId].position, _duration)
+			.SetEase(_ease)
+			.OnComplete(() => 
+			{
+				if (_currentPointId < PointsCount)
+					_currentPointId += 1;
+				else 
+					_currentPointId = 0;
 
-    private void OnDrawGizmos()
-    {
-        if (_isDebug == false)
-            return;
+				Move();
+			});
+	}
 
-        if (_points == null || _points.Count < MinPointsToDraw)
-            return;
+	private void OnDrawGizmos()
+	{
+		if (_isDebug == false)
+			return;
 
-        Gizmos.color = Color.yellow;
+		if (_points == null || _points.Count < MinPointsToDraw)
+			return;
 
-        foreach (Transform point in _points)
-            Gizmos.DrawWireSphere(point.position, DrawSphereRadius);
+		Gizmos.color = Color.yellow;
 
-        for (int i = 0; i < PointsCount; i++)
-            Gizmos.DrawLine(_points[i].position, _points[i + 1].position);
+		foreach (Transform point in _points)
+			Gizmos.DrawWireSphere(point.position, DrawSphereRadius);
 
-        Gizmos.DrawLine(_points[PointsCount].position, _points[0].position);
-    }
+		for (int i = 0; i < PointsCount; i++)
+			Gizmos.DrawLine(_points[i].position, _points[i + 1].position);
+
+		Gizmos.DrawLine(_points[PointsCount].position, _points[0].position);
+	}
 }

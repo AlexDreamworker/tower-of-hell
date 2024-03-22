@@ -4,57 +4,63 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CharacterCamera : MonoBehaviour, ICamera
 {
-    private IInputService _input;
-    private CharacterCameraConfig _config;
-    private Transform _character;
-    private Transform _targetPoint;
-    private Camera _camera;
+	private IInputService _input;
+	private CharacterCameraConfig _config;
+	private Transform _character;
+	private Transform _targetPoint;
+	private Camera _camera;
 
-    private float _xRotation;
-    private float _yRotation;
+	private float _xRotation;
+	private float _yRotation;
 
-    private bool _isInit;
+	private bool _isInit;
+	
+	private Tween _tween;
 
-    public void Initialize(IInputService input, CharacterConfig config, Transform character, Transform point)
-    {
-        _input = input;
-        _config = config.CameraConfig;
-        _character = character;
-        _targetPoint = point;
+	public void Initialize(IInputService input, CharacterConfig config, Transform character, Transform point)
+	{
+		_input = input;
+		_config = config.CameraConfig;
+		_character = character;
+		_targetPoint = point;
 
-        _camera = GetComponent<Camera>();
+		_camera = GetComponent<Camera>();
 
-        _isInit = true;
-    }
+		_isInit = true;
+	}
 
-    private void Update()
-    {
-        if (_isInit == false)
-            return;
+	private void Update()
+	{
+		if (_isInit == false)
+			return;
 
-        UpdatePosition();
-    }
+		UpdatePosition();
+	}
 
-    private void LateUpdate()
-    {
-        if (_isInit == false)
-            return;
-            
-        float mouseX = _input.Look.x * Time.deltaTime * _config.XSensitivity;
-        float mouseY = _input.Look.y * Time.deltaTime * _config.YSensitivity;
+	private void LateUpdate()
+	{
+		if (_isInit == false)
+			return;
+			
+		float mouseX = _input.Look.x * Time.deltaTime * _config.XSensitivity;
+		float mouseY = _input.Look.y * Time.deltaTime * _config.YSensitivity;
 
-        _yRotation += mouseX;
+		_yRotation += mouseX;
 
-        _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, _config.XClampRotationMin, _config.XClampRotationMax);
+		_xRotation -= mouseY;
+		_xRotation = Mathf.Clamp(_xRotation, _config.XClampRotationMin, _config.XClampRotationMax);
 
-        transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-        _character.rotation = Quaternion.Euler(0, _yRotation, 0);
-    }
+		transform.rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
+		_character.rotation = Quaternion.Euler(0, _yRotation, 0);
+	}
+	
+	private void OnDisable() => _tween?.Kill();
 
-    public void SetFOV(float value, float time) => _camera.DOFieldOfView(value, time);
+	public void SetFOV(float value, float time) 
+		=> _tween = _camera.DOFieldOfView(value, time);
 
-    public void ResetFOV(float time) => _camera.DOFieldOfView(_config.NormalFOV, time);
+	public void ResetFOV(float time) 
+		=> _tween = _camera.DOFieldOfView(_config.NormalFOV, time);
 
-    private void UpdatePosition() => transform.position = _targetPoint.position;
+	private void UpdatePosition() => transform.position = _targetPoint.position;
 }

@@ -77,6 +77,7 @@ public class ScaleTweener : MonoBehaviour
 		_tween = transform.DOScale(scaleTo, duration)
 			.SetEase(ease)
 			.SetLoops(loops, loopType)
+			.SetUpdate(UpdateType.Normal, true)
 			.OnComplete(() => 
 			{
 				if (isHideOnComplete)

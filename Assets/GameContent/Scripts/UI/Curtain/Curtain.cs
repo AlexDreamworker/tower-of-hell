@@ -6,6 +6,7 @@ public class Curtain : MonoBehaviour
 {
 	public event Action Completed;
 
+	[SerializeField] private GameObject imageBlock;
 	[SerializeField] private List<ScaleTweener> _tweeners = new List<ScaleTweener>();
 	
 	private void OnEnable()
@@ -22,6 +23,8 @@ public class Curtain : MonoBehaviour
 
 	public void Show() 
 	{
+		imageBlock.transform.Activate();
+		
 		foreach (var tweener in _tweeners)
 		{
 			tweener.Show();
@@ -31,6 +34,8 @@ public class Curtain : MonoBehaviour
 
 	public void Hide() 
 	{	
+		imageBlock.transform.Activate();
+		
 		foreach (var tweener in _tweeners)
 		{
 			tweener.Show();
@@ -38,5 +43,10 @@ public class Curtain : MonoBehaviour
 		}
 	}
 	
-	private void OnCompleted() => Completed?.Invoke();
+	private void OnCompleted()
+	{
+		imageBlock.transform.Deactivate();
+		
+		Completed?.Invoke();
+	}
 }

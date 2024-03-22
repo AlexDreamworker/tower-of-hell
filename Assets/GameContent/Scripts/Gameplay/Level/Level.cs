@@ -2,8 +2,10 @@ using System;
 using UnityEngine;
 using Zenject;
 
+//TODO: refact methods
 public class Level : IInitializable, IDisposable
 {
+	public event Action<int> Initialized;
 	public event Action Started;
 	public event Action Restarted;
 	public event Action Paused;
@@ -19,6 +21,8 @@ public class Level : IInitializable, IDisposable
 	private CharacterCamera _camera;
 	private CheckpointsHandler _checkpointsHandler;
 	private Curtain _curtain;
+	private SceneLoadMediator _loader;
+	private LevelLoadingData _levelData;
 
 	private bool _isPaused = false;
 
@@ -29,7 +33,9 @@ public class Level : IInitializable, IDisposable
 		Character character, 
 		CharacterCamera camera,
 		CheckpointsHandler checkpointsHandler,
-		Curtain curtain)
+		Curtain curtain,
+		SceneLoadMediator loader,
+		LevelLoadingData levelData)
 	{ 
 		_input = input;
 		_pause = pause;
@@ -38,11 +44,18 @@ public class Level : IInitializable, IDisposable
 		_camera = camera;
 		_checkpointsHandler = checkpointsHandler;
 		_curtain = curtain;
+		_loader = loader;
+		_levelData = levelData;
 
 		_input.PauseKeyPressed += OnPausePressed;
 	}
 	
-	public void Initialize() => _curtain.Hide();
+	public void Initialize()
+	{
+		_curtain.Hide();
+		
+		Initialized?.Invoke(_levelData.Level);
+	}
 
 	public void Dispose()
 		=> _input.PauseKeyPressed -= OnPausePressed;
@@ -104,6 +117,8 @@ public class Level : IInitializable, IDisposable
 	{
 		_input.Disable();
 		_character.StopWork();
+		
+		_curtain.Completed += OnReadyToNextLevel;
 		_curtain.Show();
 
 		Completed?.Invoke();
@@ -117,8 +132,25 @@ public class Level : IInitializable, IDisposable
 
 		Failed?.Invoke();
 	}
+	
+	public void GoToMainMenu() 
+	{
+		_input.Disable();
+		_character.StopWork();
+		
+		_curtain.Completed += OnReadyToMainMenu;
+		_curtain.Show();
+	}
+	
+	private void OnReadyToNextLevel() 
+	{
+		_curtain.Completed -= OnReadyToNextLevel;
+		
+		_cursor.Visible(true);
+		_pause.Disable();
 
-	public void LoadNextLevel() { }
+		LoadNextLevel();	
+	}
 
 	private void OnPausePressed()
 	{
@@ -129,4 +161,27 @@ public class Level : IInitializable, IDisposable
 		else
 			OnContinued();    
 	}
+		
+	private void OnReadyToMainMenu() 
+	{
+		_curtain.Completed -= OnReadyToMainMenu;
+		
+		_cursor.Visible(true);
+		_pause.Disable();
+		
+		LoadMainMenu();
+	}
+	
+	private void LoadNextLevel()
+	{
+		int nextLevel = _levelData.Level;
+		nextLevel++;
+		
+		if (nextLevel >= Enum.GetValues(typeof(SceneID)).Length)
+			LoadMainMenu();
+		else 
+			_loader.GoToLevel((SceneID)nextLevel, new LevelLoadingData(nextLevel));
+
+	}
+	private void LoadMainMenu() => _loader.GoToMainMenu();
 }
