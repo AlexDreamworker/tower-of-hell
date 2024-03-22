@@ -6,10 +6,10 @@ public class DefeatPanel : BasePanel
 {
     [SerializeField] private Button _buttonContinue;
 
-    private UIMediator _mediator;
+    private LevelMediator _mediator;
 
     [Inject]
-    private void Construct(UIMediator mediator) 
+    private void Construct(LevelMediator mediator) 
         => _mediator = mediator;
 
     private void Start() => Hide();

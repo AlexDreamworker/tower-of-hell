@@ -9,10 +9,10 @@ public class StartPanel : BasePanel
 
     private const float AnimationDuration = 1f;
 
-    private UIMediator _mediator;
+    private LevelMediator _mediator;
 
     [Inject]
-    private void Construct(UIMediator mediator) 
+    private void Construct(LevelMediator mediator) 
         => _mediator = mediator;
 
     private void OnEnable()

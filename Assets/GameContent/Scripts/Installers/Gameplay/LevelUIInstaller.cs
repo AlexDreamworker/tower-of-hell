@@ -1,13 +1,12 @@
 using UnityEngine;
 using Zenject;
 
-public class UIInstaller : MonoInstaller
+public class LevelUIInstaller : MonoInstaller
 {
     [Space]
     [SerializeField] private MobileInput _mobileInputPrefab;
 
     [Space]
-    [SerializeField] private Curtain _curtain;
     [SerializeField] private HUD _hud;
     [SerializeField] private StartPanel _startPanel;
     [SerializeField] private PausePanel _pausePanel;
@@ -15,17 +14,12 @@ public class UIInstaller : MonoInstaller
 
     public override void InstallBindings()
     { 
-        BindCurtain();
         BindHUD();
         BindStartPanel();
         BindPausePanel();
         BindDefeatPanel();
-        BindUIMediator();
         BindMobileInputView();
     }
-
-    private void BindCurtain()
-        => Container.Bind<Curtain>().FromInstance(_curtain).AsSingle();
 
     private void BindHUD()
         => Container.BindInterfacesAndSelfTo<HUD>().FromInstance(_hud).AsSingle();
@@ -38,9 +32,6 @@ public class UIInstaller : MonoInstaller
 
     private void BindDefeatPanel()
         => Container.BindInterfacesAndSelfTo<DefeatPanel>().FromInstance(_defeatPanel).AsSingle();
-
-    private void BindUIMediator() 
-        => Container.BindInterfacesAndSelfTo<UIMediator>().AsSingle();
 
     private void BindMobileInputView() 
     {

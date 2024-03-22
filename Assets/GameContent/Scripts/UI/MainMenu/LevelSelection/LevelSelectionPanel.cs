@@ -5,11 +5,11 @@ public class LevelSelectionPanel : MonoBehaviour
 {
 	[SerializeField] private LevelSelectionButton[] _levelSelectionButtons;
 	
-	private SceneLoadMediator _sceneLoader;
-
+	private MainMenuMediator _mediator;
+	
 	[Inject]
-	private void Construct(SceneLoadMediator sceneLoadMediator)
-		=> _sceneLoader = sceneLoadMediator;
+	private void Construct(MainMenuMediator mediator)
+		=> _mediator = mediator;
 		
 	private void OnEnable()
 	{
@@ -22,7 +22,6 @@ public class LevelSelectionPanel : MonoBehaviour
 		foreach (var levelSelectionButton in _levelSelectionButtons)
 			levelSelectionButton.Click -= OnLevelSelected;
 	}
-
-	private void OnLevelSelected(SceneID sceneID) 
-		=> _sceneLoader.GoToLevel(sceneID, new LevelLoadingData((int)sceneID));
+	
+	private void OnLevelSelected(SceneID sceneID) => _mediator.LevelSelected(sceneID);
 }
