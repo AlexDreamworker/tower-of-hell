@@ -35,7 +35,7 @@ public class Level : IInitializable, IDisposable
 		CheckpointsHandler checkpointsHandler,
 		Curtain curtain,
 		SceneLoadMediator loader,
-		LevelLoadingData levelData)
+		LevelLoadingData levelData = null) //! "null" IS FOR TESTS
 	{ 
 		_input = input;
 		_pause = pause;
@@ -54,7 +54,14 @@ public class Level : IInitializable, IDisposable
 	{
 		_curtain.Hide();
 		
-		Initialized?.Invoke(_levelData.Level);
+//!-TESTING----------------------------------------------------------
+		if (_levelData == null)
+			Initialized?.Invoke(0);
+		else 
+			Initialized?.Invoke(_levelData.Level);
+//!------------------------------------------------------------------
+
+		//!Initialized?.Invoke(_levelData.Level);
 	}
 
 	public void Dispose()
