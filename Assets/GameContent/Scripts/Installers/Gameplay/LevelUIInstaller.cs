@@ -35,10 +35,10 @@ public class LevelUIInstaller : MonoInstaller
 
     private void BindMobileInputView() 
     {
-        // if (Application.isMobilePlatform)
-            // Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
+        if (Application.isMobilePlatform)
+            Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
 
 //TODO: mobile input test
-        Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
+        //Container.InstantiatePrefabForComponent<MobileInput>(_mobileInputPrefab);
     }
 }
