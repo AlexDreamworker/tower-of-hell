@@ -1,4 +1,5 @@
 using System;
+using GamePush;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +26,7 @@ public class Level : IInitializable, IDisposable
 	private LevelLoadingData _levelData;
 
 	private bool _isPaused = false;
+	private bool _isFailed = false; //TODO: ???
 
 	private Level(
 		IInputService input,
@@ -54,14 +56,21 @@ public class Level : IInitializable, IDisposable
 	{
 		_curtain.Hide();
 		
+//TODO: Test in Editor!
 //!-TESTING----------------------------------------------------------
 		if (_levelData == null)
 			Initialized?.Invoke(0);
 		else 
 			Initialized?.Invoke(_levelData.Level);
+			
+		//Application.targetFrameRate = 20; //TODO: Test
 //!------------------------------------------------------------------
 
 		//!Initialized?.Invoke(_levelData.Level);
+
+		_cursor.Visible(true); //!!!
+		
+		GP_Ads.ShowFullscreen(); //TODO: Test GP
 	}
 
 	public void Dispose()
@@ -78,6 +87,8 @@ public class Level : IInitializable, IDisposable
 		_input.Enable();
 		_cursor.Visible(false);
 		_character.StartWork();
+		
+		_camera.SetWork(true); //TODO: ???
 
 		Started?.Invoke();
 	}
@@ -90,12 +101,23 @@ public class Level : IInitializable, IDisposable
 		_cursor.Visible(false);
 
 		_input.Enable();
+		
+		_isFailed = false; //TODO: ???
+		
+		_camera.SetWork(true); //TODO: ???
 
 		Restarted?.Invoke();
 	}
 
 	public void OnPaused()
 	{
+		if (_isFailed) //TODO: ???
+			return;
+		
+		_isPaused = true; //TODO: ???
+		
+		_camera.SetWork(false); //TODO: ???
+		
 		_pause.Enable();
 		_cursor.Visible(true);
 
@@ -104,9 +126,11 @@ public class Level : IInitializable, IDisposable
 
 	public void OnContinued() 
 	{
+		_cursor.Visible(false);
+		
 		_isPaused = false;
 
-		_cursor.Visible(false);
+		_camera.SetWork(true); //TODO: ???
 
 		Continued?.Invoke();
 
@@ -134,10 +158,19 @@ public class Level : IInitializable, IDisposable
 	public void OnFailed()
 	{
 		_input.Disable();
+		
+		_camera.SetWork(false); //TODO: ???
+		
+		_character.Failed(); //TODO: refact!
+		
 		_pause.Enable();
 		_cursor.Visible(true);
 
 		Failed?.Invoke();
+		
+		_isFailed = true; //TODO: ???
+
+		GP_Ads.ShowFullscreen(); //TODO: Test GP
 	}
 	
 	public void GoToMainMenu() 

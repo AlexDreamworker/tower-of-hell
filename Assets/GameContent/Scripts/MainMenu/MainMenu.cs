@@ -1,3 +1,4 @@
+using GamePush;
 using Zenject;
 
 public class MainMenu : IInitializable
@@ -13,7 +14,12 @@ public class MainMenu : IInitializable
 		_curtain = curtain;
 	}
 	
-	public void Initialize() => _curtain.Hide();
+	public void Initialize()
+	{
+		_curtain.Hide();
+
+		GP_Ads.ShowFullscreen(); //TODO: Test GP
+	}
 	
 	public void LevelSelected(SceneID sceneID) 
 	{

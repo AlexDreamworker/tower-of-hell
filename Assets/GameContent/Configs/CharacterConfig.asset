@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
   _cameraConfig:
-    _xSensitivity: 400
-    _ySensitivity: 400
+    _xSensitivity: 20
+    _ySensitivity: 20
     _xClampRotationMin: -60
     _xClampRotationMax: 75
     _normalFOV: 80

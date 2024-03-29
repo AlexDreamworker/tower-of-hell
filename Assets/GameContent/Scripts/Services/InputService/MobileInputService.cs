@@ -80,7 +80,7 @@ public class MobileInputService : IInputService, ITickable
 
     private void ReadKeyPause()
     {
-        if (SimpleInput.GetKeyDown(KeyCode.Tab))
+        if (SimpleInput.GetKeyDown(KeyCode.Tab) || SimpleInput.GetKeyDown(KeyCode.Escape)) //TODO: new
             PauseKeyPressed?.Invoke();
     }
 }
