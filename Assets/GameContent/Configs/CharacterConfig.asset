@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: CharacterConfig
   m_EditorClassIdentifier: 
   _cameraConfig:
-    _xSensitivity: 20
-    _ySensitivity: 20
+    _xSensitivityEditor: 100
+    _ySensitivityEditor: 100
+    _xSensitivityBuild: 20
+    _ySensitivityBuild: 20
     _xClampRotationMin: -60
     _xClampRotationMax: 75
     _normalFOV: 80
   _staminaConfig:
-    _max: 3
+    _max: 2
     _dashRate: 1
-    _increaseMultiplier: 0.1
+    _increaseMultiplier: 0.4
   _movementStateConfig:
     _speedMultiplier: 10
     _additionalGravity: 10

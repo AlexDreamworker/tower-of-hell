@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class Character : MonoBehaviour
 {
 	[Space]
@@ -22,6 +23,7 @@ public class Character : MonoBehaviour
 	private MovementStateMachine _stateMachine;
 
 	private Rigidbody _rigidbody;
+	private Collider _collider;
 
 	private bool _isWorking = false;
 
@@ -42,6 +44,7 @@ public class Character : MonoBehaviour
 		_stateMachine = stateMachine;
 
 		_rigidbody = GetComponent<Rigidbody>();
+		_collider = GetComponent<Collider>();
 	}
 
 	public IInputService Input => _input;
@@ -90,27 +93,22 @@ public class Character : MonoBehaviour
 		_rigidbody.velocity = Vector3.zero;
 	} 
 
-//TODO: fix this
-//!------------------------------------------------------------------
-	public void SetPosition(Vector3 position)
+	public void SetPosition(Vector3 position) //TODO: naming?
 	{
-		
 		Rigidbody.position = position;
 		
-		//?transform.position = position;
-		
-		GetComponent<Collider>().enabled = true;
-		
+		_collider.enabled = true;
 		_rigidbody.isKinematic = false;
+		
+		_stamina.Reset();
 	}
 	
-	public void Failed() 
+	public void DisablePhysics() //TODO: naming?
 	{
 		_rigidbody.isKinematic = true;
-		
-		GetComponent<Collider>().enabled = false;
+		_collider.enabled = false;
 	}
-//!------------------------------------------------------------------
+
 
 //TODO: Testing
 	public void LogStateInfo(Type type, string color) { }

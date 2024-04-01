@@ -56,6 +56,8 @@ public class Level : IInitializable, IDisposable
 	{
 		_curtain.Hide();
 		
+		_isFailed = true; //TODO: ???
+		
 //TODO: Test in Editor!
 //!-TESTING----------------------------------------------------------
 		if (_levelData == null)
@@ -70,7 +72,7 @@ public class Level : IInitializable, IDisposable
 
 		_cursor.Visible(true); //!!!
 		
-		GP_Ads.ShowFullscreen(); //TODO: Test GP
+		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
 	}
 
 	public void Dispose()
@@ -78,6 +80,8 @@ public class Level : IInitializable, IDisposable
 
 	public void OnStarted()
 	{ 
+		_pause.Disable();
+		
 		_camera.Initialize(
 			_input, 
 			_character.Config, 
@@ -89,6 +93,8 @@ public class Level : IInitializable, IDisposable
 		_character.StartWork();
 		
 		_camera.SetWork(true); //TODO: ???
+		
+		_isFailed = false; //TODO: ???
 
 		Started?.Invoke();
 	}
@@ -161,7 +167,7 @@ public class Level : IInitializable, IDisposable
 		
 		_camera.SetWork(false); //TODO: ???
 		
-		_character.Failed(); //TODO: refact!
+		_character.DisablePhysics(); //TODO: refact!
 		
 		_pause.Enable();
 		_cursor.Visible(true);
@@ -170,7 +176,7 @@ public class Level : IInitializable, IDisposable
 		
 		_isFailed = true; //TODO: ???
 
-		GP_Ads.ShowFullscreen(); //TODO: Test GP
+		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
 	}
 	
 	public void GoToMainMenu() 

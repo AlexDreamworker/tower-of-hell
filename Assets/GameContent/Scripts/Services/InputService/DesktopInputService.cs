@@ -80,7 +80,7 @@ public class DesktopInputService : IInputService, ITickable
 
     private void ReadKeyPause()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape)) //TODO: new
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
             PauseKeyPressed?.Invoke();
     }
 }

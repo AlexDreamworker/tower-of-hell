@@ -18,7 +18,7 @@ public class MainMenu : IInitializable
 	{
 		_curtain.Hide();
 
-		GP_Ads.ShowFullscreen(); //TODO: Test GP
+		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
 	}
 	
 	public void LevelSelected(SceneID sceneID) 

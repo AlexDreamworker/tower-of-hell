@@ -48,7 +48,6 @@ public class DashState : BaseState
 
         Rigidbody.AddForce(Transform.forward * _config.Force, ForceMode.Impulse);
 
-        //TODO: Clean this line?
         yield return new WaitUntil(() 
             => Vector3.Distance(startPosition, Transform.position) >= _config.Distance || _wallDetector.IsTouches);
 

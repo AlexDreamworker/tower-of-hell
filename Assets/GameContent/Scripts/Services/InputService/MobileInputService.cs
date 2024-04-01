@@ -12,8 +12,8 @@ public class MobileInputService : IInputService, ITickable
 
     private const string VerticalAxisKey = "Vertical";
     private const string HorizontalAxisKey = "Horizontal";
-    private const string MouseXKey = "Mouse X";
-    private const string MouseYKey = "Mouse Y";
+    private const string MouseXKey = "Mouse X Mobile";
+    private const string MouseYKey = "Mouse Y Mobile";
 
     private Vector2 _movement;
     private Vector2 _look;
@@ -80,7 +80,7 @@ public class MobileInputService : IInputService, ITickable
 
     private void ReadKeyPause()
     {
-        if (SimpleInput.GetKeyDown(KeyCode.Tab) || SimpleInput.GetKeyDown(KeyCode.Escape)) //TODO: new
+        if (SimpleInput.GetKeyDown(KeyCode.Tab) || SimpleInput.GetKeyDown(KeyCode.Escape))
             PauseKeyPressed?.Invoke();
     }
 }
