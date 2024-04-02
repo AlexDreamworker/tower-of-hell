@@ -1,24 +1,24 @@
-using GamePush;
 using Zenject;
 
 public class MainMenu : IInitializable
 {
 	private SceneLoadMediator _loader;
 	private Curtain _curtain;
+	private IAdsService _ads;
 	
 	private SceneID _sceneToLoad;
 	
-	private MainMenu(SceneLoadMediator loader, Curtain curtain)
+	private MainMenu(SceneLoadMediator loader, Curtain curtain, IAdsService ads)
 	{
 		_loader = loader;
 		_curtain = curtain;
+		_ads = ads;
 	}
 	
 	public void Initialize()
 	{
 		_curtain.Hide();
-
-		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
+		_ads.ShowFullScreen();
 	}
 	
 	public void LevelSelected(SceneID sceneID) 

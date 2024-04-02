@@ -3,11 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class CharacterView : MonoBehaviour
 {
-	//TODO: Animator.StringToHash()?
-	private const string IsIdling = "IsIdling";
-	private const string IsWalking = "IsWalking";
-	private const string IsRunning = "IsRunning";
-	private const string IsDancing = "IsDancing";
+	private readonly int IsIdlingKey = Animator.StringToHash("IsIdling");
+	private readonly int IsWalkingKey = Animator.StringToHash("IsWalking");
+	private readonly int IsRunningKey = Animator.StringToHash("IsRunning");
+	private readonly int IsDancingKey = Animator.StringToHash("IsDancing");
 	
 	private Animator _animator;
 
@@ -20,15 +19,15 @@ public class CharacterView : MonoBehaviour
 
 	public void StartWork() => StopDancing();
 
-	public void StartIdling() => _animator.SetBool(IsIdling, true);
-	public void StopIdling() => _animator.SetBool(IsIdling, false);
+	public void StartIdling() => _animator.SetBool(IsIdlingKey, true);
+	public void StopIdling() => _animator.SetBool(IsIdlingKey, false);
 
-	public void StartWalking() => _animator.SetBool(IsWalking, true);
-	public void StopWalking() => _animator.SetBool(IsWalking, false);
+	public void StartWalking() => _animator.SetBool(IsWalkingKey, true);
+	public void StopWalking() => _animator.SetBool(IsWalkingKey, false);
 
-	public void StartRunning() => _animator.SetBool(IsRunning, true);
-	public void StopRunning() => _animator.SetBool(IsRunning, false);
+	public void StartRunning() => _animator.SetBool(IsRunningKey, true);
+	public void StopRunning() => _animator.SetBool(IsRunningKey, false);
 
-	private void StartDancing() => _animator.SetBool(IsDancing, true);
-	private void StopDancing() => _animator.SetBool(IsDancing, false);
+	private void StartDancing() => _animator.SetBool(IsDancingKey, true);
+	private void StopDancing() => _animator.SetBool(IsDancingKey, false);
 }

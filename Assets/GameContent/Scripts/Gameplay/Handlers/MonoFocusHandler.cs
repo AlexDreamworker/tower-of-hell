@@ -1,8 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-//TODO: Move to services? Remove from SceneContext!
-public class PauseHandler : MonoBehaviour
+public class MonoFocusHandler : MonoBehaviour
 {
 	private Level _level;
 	

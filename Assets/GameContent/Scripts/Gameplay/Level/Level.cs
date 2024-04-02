@@ -1,9 +1,7 @@
 using System;
-using GamePush;
 using UnityEngine;
 using Zenject;
 
-//TODO: refact methods
 public class Level : IInitializable, IDisposable
 {
 	public event Action<int> Initialized;
@@ -18,6 +16,7 @@ public class Level : IInitializable, IDisposable
 	private IInputService _input;
 	private IPauseService _pause;
 	private ICursorService _cursor;
+	private IAdsService _ads;
 	private Character _character;
 	private CharacterCamera _camera;
 	private CheckpointsHandler _checkpointsHandler;
@@ -26,12 +25,13 @@ public class Level : IInitializable, IDisposable
 	private LevelLoadingData _levelData;
 
 	private bool _isPaused = false;
-	private bool _isFailed = false; //TODO: ???
+	private bool _isFailed = false; //TODO: rename!
 
 	private Level(
 		IInputService input,
 		IPauseService pause,
-		ICursorService cursor, 
+		ICursorService cursor,
+		IAdsService ads,
 		Character character, 
 		CharacterCamera camera,
 		CheckpointsHandler checkpointsHandler,
@@ -42,6 +42,7 @@ public class Level : IInitializable, IDisposable
 		_input = input;
 		_pause = pause;
 		_cursor = cursor;
+		_ads = ads;
 		_character = character;
 		_camera = camera;
 		_checkpointsHandler = checkpointsHandler;
@@ -54,9 +55,11 @@ public class Level : IInitializable, IDisposable
 	
 	public void Initialize()
 	{
+		//Application.targetFrameRate = 20; //TODO: Test FPS
+		
 		_curtain.Hide();
 		
-		_isFailed = true; //TODO: ???
+		_isFailed = true;
 		
 //TODO: Test in Editor!
 //!-TESTING----------------------------------------------------------
@@ -64,15 +67,13 @@ public class Level : IInitializable, IDisposable
 			Initialized?.Invoke(0);
 		else 
 			Initialized?.Invoke(_levelData.Level);
-			
-		//Application.targetFrameRate = 20; //TODO: Test
-//!------------------------------------------------------------------
 
 		//!Initialized?.Invoke(_levelData.Level);
+//!------------------------------------------------------------------
 
-		_cursor.Visible(true); //!!!
+		_cursor.Visible(true);
 		
-		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
+		_ads.ShowFullScreen();
 	}
 
 	public void Dispose()
@@ -92,9 +93,9 @@ public class Level : IInitializable, IDisposable
 		_cursor.Visible(false);
 		_character.StartWork();
 		
-		_camera.SetWork(true); //TODO: ???
+		_camera.SetWork(true);
 		
-		_isFailed = false; //TODO: ???
+		_isFailed = false;
 
 		Started?.Invoke();
 	}
@@ -103,26 +104,26 @@ public class Level : IInitializable, IDisposable
 	{
 		_pause.Disable();
 
-		_character.SetPosition(_checkpointsHandler.GetPoint());
+		_character.ReturnToCheckpoint(_checkpointsHandler.GetPoint());
 		_cursor.Visible(false);
 
 		_input.Enable();
 		
-		_isFailed = false; //TODO: ???
+		_isFailed = false;
 		
-		_camera.SetWork(true); //TODO: ???
+		_camera.SetWork(true);
 
 		Restarted?.Invoke();
 	}
 
 	public void OnPaused()
 	{
-		if (_isFailed) //TODO: ???
+		if (_isFailed)
 			return;
 		
-		_isPaused = true; //TODO: ???
+		_isPaused = true;
 		
-		_camera.SetWork(false); //TODO: ???
+		_camera.SetWork(false);
 		
 		_pause.Enable();
 		_cursor.Visible(true);
@@ -136,7 +137,7 @@ public class Level : IInitializable, IDisposable
 		
 		_isPaused = false;
 
-		_camera.SetWork(true); //TODO: ???
+		_camera.SetWork(true);
 
 		Continued?.Invoke();
 
@@ -157,26 +158,25 @@ public class Level : IInitializable, IDisposable
 		
 		_curtain.Completed += OnReadyToNextLevel;
 		_curtain.Show();
+		
+		_isFailed = true;
 
 		Completed?.Invoke();
 	}
 
 	public void OnFailed()
 	{
-		_input.Disable();
-		
-		_camera.SetWork(false); //TODO: ???
-		
-		_character.DisablePhysics(); //TODO: refact!
-		
+		_input.Disable();	
+		_camera.SetWork(false);
+		_character.Freeze();
 		_pause.Enable();
 		_cursor.Visible(true);
 
 		Failed?.Invoke();
 		
-		_isFailed = true; //TODO: ???
-
-		GP_Ads.ShowFullscreen(); //TODO: Move GP logic to GP Service
+		_isFailed = true;
+		
+		_ads.ShowFullScreen();
 	}
 	
 	public void GoToMainMenu() 

@@ -93,20 +93,21 @@ public class Character : MonoBehaviour
 		_rigidbody.velocity = Vector3.zero;
 	} 
 
-	public void SetPosition(Vector3 position) //TODO: naming?
+	public void ReturnToCheckpoint(Vector3 position)
 	{
 		Rigidbody.position = position;
 		
-		_collider.enabled = true;
-		_rigidbody.isKinematic = false;
-		
 		_stamina.Reset();
+
+		SetPhysicsActivity(true);		
 	}
 	
-	public void DisablePhysics() //TODO: naming?
+	public void Freeze() => SetPhysicsActivity(false);
+	
+	private void SetPhysicsActivity(bool isEnabled) 
 	{
-		_rigidbody.isKinematic = true;
-		_collider.enabled = false;
+		_rigidbody.isKinematic = !isEnabled;
+		_collider.enabled = isEnabled;
 	}
 
 
