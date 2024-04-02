@@ -17,6 +17,7 @@ public class Level : IInitializable, IDisposable
 	private IPauseService _pause;
 	private ICursorService _cursor;
 	private IAdsService _ads;
+	private IProgressService _progress;
 	private Character _character;
 	private CharacterCamera _camera;
 	private CheckpointsHandler _checkpointsHandler;
@@ -32,6 +33,7 @@ public class Level : IInitializable, IDisposable
 		IPauseService pause,
 		ICursorService cursor,
 		IAdsService ads,
+		IProgressService progress,
 		Character character, 
 		CharacterCamera camera,
 		CheckpointsHandler checkpointsHandler,
@@ -43,6 +45,7 @@ public class Level : IInitializable, IDisposable
 		_pause = pause;
 		_cursor = cursor;
 		_ads = ads;
+		_progress = progress;
 		_character = character;
 		_camera = camera;
 		_checkpointsHandler = checkpointsHandler;
@@ -221,8 +224,11 @@ public class Level : IInitializable, IDisposable
 	private void LoadNextLevel()
 	{
 		int nextLevel = _levelData.Level;
-		nextLevel++;
 		
+		_progress.Save(StorageKeys.Levels, nextLevel);
+
+		nextLevel++;
+
 		if (nextLevel >= Enum.GetValues(typeof(SceneID)).Length)
 			LoadMainMenu();
 		else 

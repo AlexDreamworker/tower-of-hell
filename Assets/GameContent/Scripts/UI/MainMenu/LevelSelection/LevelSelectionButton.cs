@@ -17,5 +17,7 @@ public class LevelSelectionButton : MonoBehaviour
 
 	private void OnDisable() => _button.RemoveListener(OnClick);
 
+	public void SetInteractable(bool isEnable) => _button.interactable = isEnable;
+
 	private void OnClick() => Click?.Invoke(_sceneID);
 }
